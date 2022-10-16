@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+
 public class EnquiryFormDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

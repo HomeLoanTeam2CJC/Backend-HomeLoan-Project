@@ -8,4 +8,5 @@ import com.hexaware.hlmbackend.app.model.EnquiryForm;
 @Repository
 public interface EnquiryFormRepository extends JpaRepository<EnquiryForm, Integer>{
 
+	
 }

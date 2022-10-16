@@ -96,10 +96,13 @@ public class EnquiryFormController {
 	@PutMapping(value = "/updateEnquriyForm/{enquiryId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public EnquiryForm updateEnquiryFormData(
 			@RequestPart String userEnquiryForm,
-			@RequestPart MultipartFile uploadedPancard,
+			@RequestPart("uploadedPancard") MultipartFile uploadedPancard,
 			@PathVariable Integer enquiryId) throws IOException
 	{
 		
+		
+		
+		System.out.println("Compiler reached inside update method");
 		
 		ObjectMapper om = new ObjectMapper(); //studentName is in json format, so converting it into java Student format
 		EnquiryForm ef = om.readValue(userEnquiryForm, EnquiryForm.class);
@@ -121,6 +124,9 @@ public class EnquiryFormController {
 		addr.setPincode(ef.getAddress().getPincode());
 		
 		
+		
+//		Integer enquiryIdInteger = Integer.parseInt(enquiryId);
+//		System.out.println();
 		//In order to perform update operation using save method
 		eqf.setEnquiryId(enquiryId);
 		
@@ -139,10 +145,27 @@ public class EnquiryFormController {
 		eqf.setUploadedPancard(uploadedPancard.getBytes());
 		
 		CibilData cibil = new CibilData();
-		cibil.setCibilScore(ef.getCibilDetails().getCibilScore());
-		cibil.setCibilScoreDateTime(ef.getCibilDetails().getCibilScoreDateTime());
-		cibil.setStatus(ef.getCibilDetails().getStatus());
-		cibil.setRemarksByOe(ef.getCibilDetails().getRemarksByOe());
+		
+		if(ef.getCibilDetails().getCibilId() != null) {
+			
+			System.out.println("If block executed");
+			cibil.setCibilId(ef.getCibilDetails().getCibilId());
+			cibil.setCibilScore(ef.getCibilDetails().getCibilScore());
+			cibil.setCibilScoreDateTime(ef.getCibilDetails().getCibilScoreDateTime());
+			cibil.setStatus(ef.getCibilDetails().getStatus());
+			cibil.setRemarksByOe(ef.getCibilDetails().getRemarksByOe());
+		}
+		else {
+			
+			System.out.println("else block executed");
+			
+			cibil.setCibilScore(ef.getCibilDetails().getCibilScore());
+			cibil.setCibilScoreDateTime(ef.getCibilDetails().getCibilScoreDateTime());
+			cibil.setStatus(ef.getCibilDetails().getStatus());
+			cibil.setRemarksByOe(ef.getCibilDetails().getRemarksByOe());
+			
+		}
+		
 		
 		
 		eqf.setCibilDetails(cibil);
