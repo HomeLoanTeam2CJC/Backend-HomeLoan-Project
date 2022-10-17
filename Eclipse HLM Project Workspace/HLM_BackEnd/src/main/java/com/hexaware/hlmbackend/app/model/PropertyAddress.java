@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 public class PropertyAddress {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer propertyAddressId;
 	private String areaName;
 	private String cityName;

@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 public class TechnicalCheck {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer technicalCheckId;
 	private String propertyVisit;
 	private Double propertyValuation;

@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 public class FinancialCheck {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer financialCheckId;
 	private Integer cibilScore;
 	private  Double netIncome;

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class CibilData {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cibilId;
 	private Integer cibilScore;
 	private String cibilScoreDateTime;

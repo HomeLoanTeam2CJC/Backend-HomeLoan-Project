@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 public class EducationalInfo {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer educationId;
 	private String educationType;
 }

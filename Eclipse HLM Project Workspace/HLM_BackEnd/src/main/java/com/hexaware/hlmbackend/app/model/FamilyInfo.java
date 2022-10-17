@@ -14,7 +14,7 @@ import lombok.Data;
 public class FamilyInfo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer familyInfoId;
 	private String fatherName;
 	private String motherName;

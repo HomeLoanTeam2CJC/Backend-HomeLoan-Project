@@ -14,7 +14,7 @@ import lombok.Data;
 public class Profession {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer professionId;
 	private String professionType;
 	private Double professionSalary;

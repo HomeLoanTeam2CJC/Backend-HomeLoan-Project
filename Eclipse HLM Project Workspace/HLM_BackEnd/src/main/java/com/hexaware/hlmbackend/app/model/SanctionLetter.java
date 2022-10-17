@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 public class SanctionLetter {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sanctionId;
 	private String sanctionDate;
 	private String applicantName;
