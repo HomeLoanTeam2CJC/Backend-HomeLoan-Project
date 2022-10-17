@@ -99,6 +99,18 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		educationRepo.save(ei);
 	}
 
+	@Override
+	public EnquiryForm getPancard(Integer enquiryId) {
+		
+		Optional<EnquiryForm> enquiryForPnacrd = enquiryRepo.findById(enquiryId);
+		if(enquiryForPnacrd.isPresent()) {
+			return enquiryForPnacrd.get();
+			}
+		else {
+			return null;
+		}
+		}
+
 
 
 	

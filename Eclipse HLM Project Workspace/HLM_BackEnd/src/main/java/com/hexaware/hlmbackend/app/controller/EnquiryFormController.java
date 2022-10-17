@@ -96,10 +96,9 @@ public class EnquiryFormController {
 	@PutMapping(value = "/updateEnquriyForm/{enquiryId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public EnquiryForm updateEnquiryFormData(
 			@RequestPart String userEnquiryForm,
-			@RequestPart("uploadedPancard") MultipartFile uploadedPancard,
 			@PathVariable Integer enquiryId) throws IOException
 	{
-		
+//		@RequestPart("uploadedPancard") MultipartFile uploadedPancard,
 		
 		
 		System.out.println("Compiler reached inside update method");
@@ -142,7 +141,10 @@ public class EnquiryFormController {
 		eqf.setLoanPurpose(ef.getLoanPurpose());
 		eqf.setNearestBranch(ef.getNearestBranch());
 		
-		eqf.setUploadedPancard(uploadedPancard.getBytes());
+		
+		//To get pancard file form DB and reassign it
+		EnquiryForm enquiryForPancard = hlsi.getPancard(enquiryId);
+		eqf.setUploadedPancard(enquiryForPancard.getUploadedPancard());
 		
 		CibilData cibil = new CibilData();
 		

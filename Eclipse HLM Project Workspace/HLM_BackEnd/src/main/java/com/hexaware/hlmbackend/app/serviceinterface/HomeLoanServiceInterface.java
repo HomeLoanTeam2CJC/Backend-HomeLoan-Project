@@ -27,6 +27,10 @@ public interface HomeLoanServiceInterface {
 
 	void insertCustomerEducation(EducationalInfo ei);
 
+	EnquiryForm getPancard(Integer enquiryId);
+
+	
+
 	
 
 }
