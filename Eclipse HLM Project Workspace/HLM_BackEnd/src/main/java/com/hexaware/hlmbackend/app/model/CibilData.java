@@ -1,5 +1,6 @@
 package com.hexaware.hlmbackend.app.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,5 +23,8 @@ public class CibilData {
 	private String cibilScoreDateTime;
 	private String status;
 	private String remarksByOe;
+	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "cibilDetails")
+	private Customer customer;
 	
 }

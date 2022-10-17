@@ -24,4 +24,8 @@ public class DeligenceReport {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private TechnicalCheck technicalCheck;
+	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "deligenceReport")
+	private Customer customer;
+	
 }
