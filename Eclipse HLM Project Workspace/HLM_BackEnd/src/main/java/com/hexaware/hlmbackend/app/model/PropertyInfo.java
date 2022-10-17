@@ -15,7 +15,7 @@ import lombok.Data;
 public class PropertyInfo {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer propertyId;
 	private String propertyType;
 	private String propertyArea;

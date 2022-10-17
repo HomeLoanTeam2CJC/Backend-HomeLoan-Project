@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 public class DeligenceReport {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer deligenceReportId;
 	
 	@OneToOne(cascade = CascadeType.ALL)

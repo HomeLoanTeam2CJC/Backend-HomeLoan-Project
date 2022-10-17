@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 public class GurantorDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer gurantorId;
 	private String gurantorName;
 	private String gurantorDateOfBirth;

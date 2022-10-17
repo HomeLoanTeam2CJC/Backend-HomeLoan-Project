@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Address {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer addressId;
 	private Integer houseNumber;
 	private String streetName;

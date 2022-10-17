@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 public class LoanAgreement {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer loanAgreementId;
 	private String loanAgreementName;
 	private String applicantName;

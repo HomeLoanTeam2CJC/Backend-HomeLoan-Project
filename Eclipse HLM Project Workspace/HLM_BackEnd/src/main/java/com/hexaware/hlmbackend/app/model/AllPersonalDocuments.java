@@ -13,7 +13,7 @@ import lombok.Data;
 public class AllPersonalDocuments {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer documentId;
 	@Lob
 	private byte[] addressProof;
