@@ -78,6 +78,7 @@ public class CustomerController {
 		c.setCustomerMobileNumber2(cla.getCustomerMobileNumber2());
 		c.setCustomerAmountPaidForHome(cla.getCustomerAmountPaidForHome());
 		c.setCustomerTotalLoanRequired(cla.getCustomerTotalLoanRequired());
+		
 		c.setDeligenceStatus(cla.getDeligenceStatus());
 		c.setDoReportBmResponseStatus(cla.getDoReportBmResponseStatus());
 		c.setDoReportBmResponse(cla.getDoReportBmResponse());
@@ -251,5 +252,36 @@ public class CustomerController {
 		return msg;
 	}
 
-	
+	@PostMapping("/postStep1")
+	public String saveStep1(@RequestPart String customerApplication) throws JsonMappingException, JsonProcessingException {
+		
+		ObjectMapper om = new ObjectMapper(); 
+		Customer cla = om.readValue(customerApplication, Customer.class);
+		
+		Customer c = new Customer();
+		
+		c.setCustomerName(cla.getCustomerName());
+		c.setCustomerDateOfBirth(cla.getCustomerDateOfBirth());
+		c.setCustomerAge(cla.getCustomerAge());
+		c.setCustomerGender(cla.getCustomerGender());
+		c.setCustomerEmail(cla.getCustomerEmail());
+		c.setCustomerMobileNumber(cla.getCustomerMobileNumber());
+		c.setCustomerMobileNumber2(cla.getCustomerMobileNumber2());
+		c.setCustomerAmountPaidForHome(cla.getCustomerAmountPaidForHome());
+		c.setCustomerTotalLoanRequired(cla.getCustomerTotalLoanRequired());
+		
+		Address addr1 = new Address();
+		addr1.setHouseNumber(c.getCustomerAddress().getHouseNumber());
+		addr1.setStreetName(c.getCustomerAddress().getStreetName());
+		addr1.setAreaName(c.getCustomerAddress().getAreaName());
+		addr1.setCityName(c.getCustomerAddress().getCityName());
+		addr1.setDistrict(c.getCustomerAddress().getDistrict());
+		addr1.setState(c.getCustomerAddress().getState());
+		addr1.setPincode(c.getCustomerAddress().getPincode());
+		
+		hlsi.insertCustomerApplication(c);
+		
+		
+		return "Step1 Scucccessfull";
+	}
 }

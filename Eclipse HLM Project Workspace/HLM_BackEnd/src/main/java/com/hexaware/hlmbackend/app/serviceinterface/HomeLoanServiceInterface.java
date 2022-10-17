@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hexaware.hlmbackend.app.model.Address;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.Profession;
@@ -18,11 +19,13 @@ public interface HomeLoanServiceInterface {
 
 	String insertCustomerApplication(Customer c);
 
-	void insertCustomerAddress(Address addr1);
+//	void insertCustomerAddress(Address addr1);
 
 	void insertCustomerFamilyInfo(FamilyInfo fi);
 
 	void insertCustomerProffesion(Profession p);
+
+	void insertCustomerEducation(EducationalInfo ei);
 
 	
 

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hexaware.hlmbackend.app.model.Address;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
@@ -30,38 +31,32 @@ public class Step2Controller {
 		
 		ObjectMapper om = new ObjectMapper(); 
 		
-		Customer c=om.readValue(customer,Customer.class);
-		
-		
-		Address addr1 = new Address();
-		addr1.setHouseNumber(c.getCustomerAddress().getHouseNumber());
-		addr1.setStreetName(c.getCustomerAddress().getStreetName());
-		addr1.setAreaName(c.getCustomerAddress().getAreaName());
-		addr1.setCityName(c.getCustomerAddress().getCityName());
-		addr1.setDistrict(c.getCustomerAddress().getDistrict());
-		addr1.setState(c.getCustomerAddress().getState());
-		addr1.setPincode(c.getCustomerAddress().getPincode());
-		
+		Customer cla=om.readValue(customer,Customer.class);
+				
+		EducationalInfo ei = new EducationalInfo();
+
+		ei.setEducationType(cla.getEducationalInfo().getEducationType());
 		
 		//FamilyInfo fin = om.readValue(step2,FamilyInfo.class);
 		
 		FamilyInfo fi = new FamilyInfo();
-		fi.setFatherName(c.getFamilyInfo().getFatherName());
-		fi.setMotherName(c.getFamilyInfo().getMotherName());
-		fi.setSpouseName(c.getFamilyInfo().getSpouseName());
-		fi.setNoOfFamilyMembers(c.getFamilyInfo().getNoOfFamilyMembers());
-		fi.setNoOfChildren(c.getFamilyInfo().getNoOfChildren());
-		fi.setMaritalStatus(c.getFamilyInfo().getMaritalStatus());
-		fi.setFamilyIncome(c.getFamilyInfo().getFamilyIncome());
+		fi.setFatherName(cla.getFamilyInfo().getFatherName());
+		fi.setMotherName(cla.getFamilyInfo().getMotherName());
+		fi.setSpouseName(cla.getFamilyInfo().getSpouseName());
+		fi.setNoOfFamilyMembers(cla.getFamilyInfo().getNoOfFamilyMembers());
+		fi.setNoOfChildren(cla.getFamilyInfo().getNoOfChildren());
+		fi.setMaritalStatus(cla.getFamilyInfo().getMaritalStatus());
+		fi.setFamilyIncome(cla.getFamilyInfo().getFamilyIncome());
 		
 	//	Profession p=om.readValue(step2, Profession.class);
 		
 		Profession pf = new Profession();
-		pf.setProfessionType(c.getProfession().getProfessionType());
-		pf.setProfessionDesignation(c.getProfession().getProfessionDesignation());
-		pf.setProfessionSalary(c.getProfession().getProfessionSalary());
+		pf.setProfessionType(cla.getProfession().getProfessionType());
+		pf.setProfessionDesignation(cla.getProfession().getProfessionDesignation());
+		pf.setProfessionSalary(cla.getProfession().getProfessionSalary());
 		
-		hlsi.insertCustomerAddress(addr1);
+		
+		hlsi.insertCustomerEducation(ei);
 		hlsi.insertCustomerFamilyInfo(fi);
 		hlsi.insertCustomerProffesion(pf);
 		

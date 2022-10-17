@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.hexaware.hlmbackend.app.model.Address;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.repository.AddressRepository;
 import com.hexaware.hlmbackend.app.repository.CustomerRepository;
+import com.hexaware.hlmbackend.app.repository.EducationInfoRepository;
 import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.repository.FamilyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.ProfessionRepository;
@@ -28,14 +30,17 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	@Autowired
 	private CustomerRepository customerRepo;
 	
-	@Autowired
-	private AddressRepository addressRepo;
+//	@Autowired
+//	private AddressRepository addressRepo;
 	
 	@Autowired
 	private FamilyInfoRepository familyRepo;
 	
 	@Autowired
 	private ProfessionRepository professionRepo;
+	
+	@Autowired
+	private EducationInfoRepository educationRepo;
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
@@ -68,12 +73,12 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		}
 	}
 
-	@Override
-	public void insertCustomerAddress(Address addr1) {
-		
-		addressRepo.save(addr1);
-		
-	}
+//	@Override
+//	public void insertCustomerAddress(Address addr1) {
+//		
+//		addressRepo.save(addr1);
+//		
+//	}
 
 	@Override
 	public void insertCustomerFamilyInfo(FamilyInfo fi) {
@@ -87,6 +92,14 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		
 		professionRepo.save(p);
 	}
+
+	@Override
+	public void insertCustomerEducation(EducationalInfo ei) {
+	
+		educationRepo.save(ei);
+	}
+
+
 
 	
 	
