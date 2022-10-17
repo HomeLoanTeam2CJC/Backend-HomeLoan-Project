@@ -46,7 +46,7 @@ public class CustomerController {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping(value = "/newApplication", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/newCustomerApplication", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String insertCustomerApplication(
 			@RequestPart String customerApplication,
 			@RequestPart(value="allPersonalDocuments.addressProof")MultipartFile addressProof,
