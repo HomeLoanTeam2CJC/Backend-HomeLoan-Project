@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 public class FieldInvestigation {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Integer fieldInvestigationId;
 	 private String addressValidity;
 	 private String companyDetailValidity;

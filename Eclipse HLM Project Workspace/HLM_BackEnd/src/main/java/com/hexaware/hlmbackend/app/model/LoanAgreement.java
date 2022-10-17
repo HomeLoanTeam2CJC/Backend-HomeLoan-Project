@@ -1,9 +1,11 @@
 package com.hexaware.hlmbackend.app.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -11,7 +13,7 @@ import lombok.Data;
 @Entity
 public class LoanAgreement {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer loanAgreementId;
 	private String loanAgreementName;
 	private String applicantName;
@@ -24,5 +26,9 @@ public class LoanAgreement {
 	private String modeOPayment;
 	private String remarks;
 	private String status;
+	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "loanAgreement")
+	private Customer customer;
+	
 	
 }

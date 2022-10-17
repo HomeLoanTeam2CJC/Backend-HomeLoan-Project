@@ -15,7 +15,7 @@ import lombok.Data;
 public class PropertyInfo {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer propertyId;
 	private String propertyType;
 	private String propertyArea;
@@ -26,6 +26,10 @@ public class PropertyInfo {
 	private byte[] propertyDocuments;
 	@Lob
 	private byte[] priceProofs;
+	
+	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "propertyInfo")
+	private Customer customer;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private PropertyAddress propertyAddress;

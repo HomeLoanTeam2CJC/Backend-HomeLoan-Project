@@ -6,18 +6,26 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.hlmbackend.app.model.AccountDetails;
 import com.hexaware.hlmbackend.app.model.Address;
+import com.hexaware.hlmbackend.app.model.AllPersonalDocuments;
+import com.hexaware.hlmbackend.app.model.CibilData;
 import com.hexaware.hlmbackend.app.model.Customer;
 import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.Profession;
+import com.hexaware.hlmbackend.app.model.PropertyInfo;
+import com.hexaware.hlmbackend.app.repository.AccountDetailsRepository;
 import com.hexaware.hlmbackend.app.repository.AddressRepository;
+import com.hexaware.hlmbackend.app.repository.CibilDataRepository;
 import com.hexaware.hlmbackend.app.repository.CustomerRepository;
 import com.hexaware.hlmbackend.app.repository.EducationInfoRepository;
 import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.repository.FamilyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.ProfessionRepository;
+import com.hexaware.hlmbackend.app.repository.PropertyInfoRepository;
+import com.hexaware.hlmbackend.app.repository.documentsUploadRepository;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
 @Service
@@ -41,6 +49,21 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	
 	@Autowired
 	private EducationInfoRepository educationRepo;
+	
+	@Autowired
+	private CibilDataRepository cibilRepo;
+	
+	@Autowired
+	private AccountDetailsRepository accountDetailRepo;
+	
+	@Autowired
+	private documentsUploadRepository documentsRepo;
+	
+	@Autowired
+	private PropertyInfoRepository propertyRepo;
+	
+//	@Autowired
+//	private 
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
@@ -110,6 +133,36 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 			return null;
 		}
 		}
+
+	@Override
+	public void insertCibilData(CibilData cd) {
+		
+		cibilRepo.save(cd);
+		
+	}
+
+	@Override
+	public void insertAccountDetails(AccountDetails ad) {
+		
+		accountDetailRepo.save(ad);
+		
+	}
+
+	@Override
+	public void documentsUpload(AllPersonalDocuments apd) {
+		
+		documentsRepo.save(apd);
+		
+	}
+
+	@Override
+	public void insertPropertyInfo(PropertyInfo pi) {
+		
+		propertyRepo.save(pi);
+		
+	}
+
+
 
 
 
