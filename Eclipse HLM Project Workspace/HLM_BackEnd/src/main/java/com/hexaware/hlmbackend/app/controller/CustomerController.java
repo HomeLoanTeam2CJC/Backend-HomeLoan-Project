@@ -1,8 +1,10 @@
 package com.hexaware.hlmbackend.app.controller;
 
 import java.io.IOException;
+import java.security.PublicKey;
 
 import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,8 @@ import com.hexaware.hlmbackend.app.model.DeligenceReport;
 import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
+import com.hexaware.hlmbackend.app.model.FieldInvestigation;
+import com.hexaware.hlmbackend.app.model.FinancialCheck;
 import com.hexaware.hlmbackend.app.model.GurantorDetails;
 import com.hexaware.hlmbackend.app.model.LoanAgreement;
 import com.hexaware.hlmbackend.app.model.LoanDisbursement;
@@ -30,11 +34,17 @@ import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyAddress;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
 import com.hexaware.hlmbackend.app.model.SanctionLetter;
+import com.hexaware.hlmbackend.app.model.TechnicalCheck;
+import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/customerApi")
 public class CustomerController {
+	
+	
+	@Autowired
+	private HomeLoanServiceInterface hlsi;
 	
 	@PostMapping(value = "/newApplication", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String insertCustomerApplication(
@@ -50,6 +60,7 @@ public class CustomerController {
 			@RequestPart(value="allPersonalDocuments.salarySlips")MultipartFile salarySlips,
 			@RequestPart(value = "propertyInfo.propertyDocuments") MultipartFile propertyDocuments,
 			@RequestPart(value = "propertyInfo.priceProofs") MultipartFile priceProofs
+			
 			) throws IOException {
 		
 		
@@ -150,31 +161,94 @@ public class CustomerController {
 		pi.setConstructionPrice(cla.getPropertyInfo().getConstructionPrice());
 		pi.setPropertyDocuments(propertyDocuments.getBytes());
 		pi.setPriceProofs(priceProofs.getBytes());
-		PropertyAddress paddr = new PropertyAddress();
-		paddr.setStreetName(cla.getPropertyInfo().getPropertyAddresss().getStreetName());
-		paddr.setAreaName(cla.getPropertyInfo().getPropertyAddresss().getAreaName());
-		paddr.setCityName(cla.getPropertyInfo().getPropertyAddresss().getCityName());
-		paddr.setDistrict(cla.getPropertyInfo().getPropertyAddresss().getDistrict());
-		paddr.setState(cla.getPropertyInfo().getPropertyAddresss().getState());
-		paddr.setPincode(cla.getPropertyInfo().getPropertyAddresss().getPincode());
 		
-		pi.setPropertyAddresss(paddr);
+		PropertyAddress paddr = new PropertyAddress();
+		paddr.setStreetName(cla.getPropertyInfo().getPropertyAddress().getStreetName());
+		paddr.setAreaName(cla.getPropertyInfo().getPropertyAddress().getAreaName());
+		paddr.setCityName(cla.getPropertyInfo().getPropertyAddress().getCityName());
+		paddr.setDistrict(cla.getPropertyInfo().getPropertyAddress().getDistrict());
+		paddr.setState(cla.getPropertyInfo().getPropertyAddress().getState());
+		paddr.setPincode(cla.getPropertyInfo().getPropertyAddress().getPincode());
+		
+		pi.setPropertyAddress(paddr);
 		c.setPropertyInfo(pi);
 		
-		
-		
 		GurantorDetails gd = new GurantorDetails();
+		gd.setGurantorName(cla.getGurantorDetails().getGurantorName());
+		gd.setGurantorDateOfBirth(cla.getGurantorDetails().getGurantorDateOfBirth());
+		gd.setGurantorrelationship(cla.getGurantorDetails().getGurantorrelationship());
+		gd.setGurantorMobileNo(cla.getGurantorDetails().getGurantorMobileNo());
+		gd.setGurantorAadharCardNo(cla.getGurantorDetails().getGurantorAadharCardNo());
+		gd.setGurantorAddress(cla.getGurantorDetails().getGurantorAddress());
+		
+		c.setGurantorDetails(gd);
 		
 		DeligenceReport dr = new DeligenceReport();
+		dr.setFieldInvestigation(cla.getDeligenceReport().getFieldInvestigation());
+		
+		FieldInvestigation fin=new FieldInvestigation();
+		fin.setAddressValidity(cla.getDeligenceReport().getFieldInvestigation().getAddressValidity());
+		fin.setCompanyDetailValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailValidity());
+		fin.setPropertyLegality(cla.getDeligenceReport().getFieldInvestigation().getPropertyLegality());	
+		
+		dr.setFinancialCheck(cla.getDeligenceReport().getFinancialCheck());
+		
+		FinancialCheck fc=new FinancialCheck();
+		fc.setCibilScore(cla.getDeligenceReport().getFinancialCheck().getCibilScore());
+		fc.setNetIncome(cla.getDeligenceReport().getFinancialCheck().getNetIncome());
+		
+		dr.setTechnicalCheck(cla.getDeligenceReport().getTechnicalCheck());
+		
+		TechnicalCheck tc=new TechnicalCheck();
+		tc.setPropertyVisit(cla.getDeligenceReport().getTechnicalCheck().getPropertyVisit());
+		tc.setPropertyValuation(cla.getDeligenceReport().getTechnicalCheck().getPropertyValuation());
+		
+		c.setDeligenceReport(dr);
 		
 		SanctionLetter sl = new SanctionLetter();
+		sl.setSanctionDate(cla.getSanctionLetter().getSanctionDate());
+		sl.setApplicantName(cla.getSanctionLetter().getApplicantName());
+		sl.setContactDetails(cla.getSanctionLetter().getContactDetails());
+		sl.setMaxSanctionAmount(cla.getSanctionLetter().getMaxSanctionAmount());
+		sl.setMaxEmi(cla.getSanctionLetter().getMaxEmi());
+		sl.setAverageTenure(cla.getSanctionLetter().getAverageTenure());
+		sl.setValidity(cla.getSanctionLetter().getValidity());
+		
+		c.setSanctionLetter(sl);
 		
 		LoanAgreement la = new LoanAgreement();
+		la.setLoanAgreementName(cla.getLoanAgreement().getApplicantName());
+		la.setApplicantName(cla.getLoanAgreement().getApplicantName());
+		la.setContactDetails(cla.getLoanAgreement().getContactDetails());
+		la.setLoanAmountSanctioned(cla.getLoanAgreement().getLoanAmountSanctioned());
+		la.setInterestType(cla.getLoanAgreement().getInterestType());
+		la.setRateOfInterest(cla.getLoanAgreement().getRateOfInterest());
+		la.setLoanTenure(cla.getLoanAgreement().getLoanTenure());
+		la.setMonthlyEmiAmount(cla.getLoanAgreement().getMonthlyEmiAmount());
+		la.setModeOPayment(cla.getLoanAgreement().getModeOPayment());
+		la.setRemarks(cla.getLoanAgreement().getRemarks());
+		la.setStatus(cla.getLoanAgreement().getStatus());
+		
+		c.setLoanAgreement(la);
 		
 		LoanDisbursement ld = new LoanDisbursement();
+		ld.setLoanNumber(cla.getLoanDisbursement().getLoanNumber());
+		ld.setAgreementDate(cla.getLoanDisbursement().getAgreementDate());
+		ld.setAmountPayType(cla.getLoanDisbursement().getAmountPayType());
+		ld.setTotalLoanAmount(cla.getLoanDisbursement().getTotalLoanAmount());
+		ld.setBankName(cla.getLoanDisbursement().getBankName());
+		ld.setAccountNumber(cla.getLoanDisbursement().getAccountNumber());
+		ld.setIfscCode(cla.getLoanDisbursement().getIfscCode());
+		ld.setAccountType(cla.getLoanDisbursement().getAccountType());
+		ld.setTransferAmount(cla.getLoanDisbursement().getTransferAmount());
+		ld.setPaymentStatus(cla.getLoanDisbursement().getPaymentStatus());
+		ld.setAmountPaidDate(cla.getLoanDisbursement().getAmountPaidDate());
 		
+		c.setLoanDisbursement(ld);
 		
-		return null;
+		String msg=hlsi.insertCustomerApplication(c);
+		
+		return msg;
 	}
 
 	

@@ -1,14 +1,27 @@
 package com.hexaware.hlmbackend.app.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-public class DeligenceReport {
+import lombok.Data;
 
+@Data
+@Entity
+public class DeligenceReport {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer deligenceReportId;
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private FinancialCheck financialCheck;
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private FieldInvestigation fieldInvestigation;
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private TechnicalCheck technicalCheck;
 }

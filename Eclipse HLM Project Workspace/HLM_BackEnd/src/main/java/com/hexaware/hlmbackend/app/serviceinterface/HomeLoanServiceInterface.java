@@ -2,6 +2,7 @@ package com.hexaware.hlmbackend.app.serviceinterface;
 
 import java.util.List;
 
+import com.hexaware.hlmbackend.app.model.Customer;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 
 public interface HomeLoanServiceInterface {
@@ -11,6 +12,8 @@ public interface HomeLoanServiceInterface {
 	List<EnquiryForm> getEnquiryFormData();
 
 	EnquiryForm updateEnquiryFormData(EnquiryForm eqf);
+
+	String insertCustomerApplication(Customer c);
 
 	
 

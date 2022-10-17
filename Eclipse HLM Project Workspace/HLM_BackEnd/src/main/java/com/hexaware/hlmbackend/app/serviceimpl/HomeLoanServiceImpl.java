@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hlmbackend.app.model.Address;
+import com.hexaware.hlmbackend.app.model.Customer;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
+import com.hexaware.hlmbackend.app.repository.CustomerRepository;
 import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
@@ -16,17 +18,20 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	
 	
 	@Autowired
-	EnquiryFormRepository repo;
+	private EnquiryFormRepository enquiryRepo;
+	
+	@Autowired
+	private CustomerRepository customerRepo;
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
 		
-		return repo.save(eqi);
+		return enquiryRepo.save(eqi);
 	}
 
 	@Override
 	public List<EnquiryForm> getEnquiryFormData() {
-		List<EnquiryForm> lenquiry=repo.findAll();
+		List<EnquiryForm> lenquiry=enquiryRepo.findAll();
 		return lenquiry;
 	}
 
@@ -35,7 +40,18 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		
 		//updating using same save method
 		
-		return repo.save(eqf);
+		return enquiryRepo.save(eqf);
+	}
+
+	@Override
+	public String insertCustomerApplication(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
 	}
 
 	

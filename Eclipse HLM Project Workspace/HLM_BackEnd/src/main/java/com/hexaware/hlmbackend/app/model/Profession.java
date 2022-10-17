@@ -16,6 +16,6 @@ public class Profession {
 	private Integer professionId;
 	private String professionType;
 	private Double professionSalary;
-	private String professionDesignation;;
+	private String professionDesignation;
 	
 }

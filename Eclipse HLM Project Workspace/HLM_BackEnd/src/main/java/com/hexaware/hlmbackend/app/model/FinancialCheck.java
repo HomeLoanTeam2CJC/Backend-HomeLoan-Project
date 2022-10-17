@@ -1,8 +1,19 @@
 package com.hexaware.hlmbackend.app.model;
 
-public class FinancialCheck {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-	private Integer cibilData;
+import lombok.Data;
+
+@Data
+@Entity
+public class FinancialCheck {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer financialCheckId;
+	private Integer cibilScore;
 	private  Double netIncome;
 	
 }

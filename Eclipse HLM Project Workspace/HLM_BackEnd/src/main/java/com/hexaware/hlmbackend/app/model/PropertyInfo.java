@@ -1,5 +1,6 @@
 package com.hexaware.hlmbackend.app.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class PropertyInfo {
 	@Lob
 	private byte[] priceProofs;
 	
-	@OneToOne
-	private PropertyAddress propertyAddresss;
+	@OneToOne(cascade = CascadeType.ALL)
+	private PropertyAddress propertyAddress;
 	
 }
