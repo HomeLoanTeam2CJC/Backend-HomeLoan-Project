@@ -24,4 +24,5 @@ public class DeligenceReport {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private TechnicalCheck technicalCheck;
+	
 }
