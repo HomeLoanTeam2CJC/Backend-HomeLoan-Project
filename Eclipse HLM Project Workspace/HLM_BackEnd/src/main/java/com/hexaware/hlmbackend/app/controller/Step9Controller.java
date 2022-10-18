@@ -22,7 +22,7 @@ public class Step9Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping(value = "/PostStep9api")
+	@PostMapping("/postStep9")
 	public String InsertStep7Data(@RequestPart String customerApplication,@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
 	{
 		ObjectMapper om = new ObjectMapper(); 

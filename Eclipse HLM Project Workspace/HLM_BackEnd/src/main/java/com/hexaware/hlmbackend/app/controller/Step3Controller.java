@@ -25,7 +25,7 @@ public class Step3Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping(value = "/postDocumentsApplication", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/postStep3", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String insertDocumentsApplication(
 			@RequestPart(value="allPersonalDocuments.addressProof")MultipartFile addressProof,
 			@RequestPart(value="allPersonalDocuments.panCard")MultipartFile panCard,
