@@ -16,6 +16,7 @@ import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
+import com.hexaware.hlmbackend.app.model.SanctionLetter;
 import com.hexaware.hlmbackend.app.repository.AccountDetailsRepository;
 import com.hexaware.hlmbackend.app.repository.AddressRepository;
 import com.hexaware.hlmbackend.app.repository.CibilDataRepository;
@@ -62,8 +63,6 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	@Autowired
 	private PropertyInfoRepository propertyRepo;
 	
-//	@Autowired
-//	private 
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
@@ -177,6 +176,90 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		}
 	}
 
+	@Override
+	public Customer getSavedCustomer(Integer savedCustomerId) {
+		
+		Optional<Customer> fetchedCustomer = customerRepo.findById(savedCustomerId);
+		
+		if(fetchedCustomer.isPresent()) {
+			return fetchedCustomer.get();
+		}
+		else {
+		return null;
+		}
+	}
+
+	public String insertStep5Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+		
+	}
+
+	@Override
+	public String insertStep6Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+		
+	}
+
+	@Override
+	public String insertStep7Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	}
+
+	@Override
+	public String insertStep8Data(Customer c) {
+		
+
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	
+	}
+
+	@Override
+	public String insertStep9Data(Customer c) {
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	}
+
+	@Override
+	public String insertstep10Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	}
+
+	
+	
+	
 
 
 

@@ -87,7 +87,7 @@ public class CustomerController {
 		c.setCustomerAcceptanceStatus(cla.getCustomerAcceptanceStatus());
 		c.setLoanAgreementStatus(cla.getLoanAgreementStatus());
 		c.setLoanAgreementBmSignStatus(cla.getLoanAgreementBmSignStatus());
-		c.setLoanAgreementCustomerSignStatus(cla.getLoanAgreementCustomerSignStatus());
+//		c.setLoanAgreementCustomerSignStatus(cla.getLoanAgreementCustomerSignStatus());
 		c.setLoanDisbursementStatus(cla.getLoanDisbursementStatus());
 		
 		Address addr = new Address();
@@ -299,9 +299,10 @@ public class CustomerController {
 //		System.out.println("HouseNumber in cla"+ cla.getCustomerAddress().getHouseNumber());
 //		System.out.println("HouseNumber in addr1" +addr1.getHouseNumber());
 		
+		c.setCustomerAddress(addr1);
+		
 		hlsi.insertCustomerApplication(c);
-		
-		
+	
 		return "Step1 Scucccessfull";
 	}
 }

@@ -15,6 +15,7 @@ public class Customer {
 
 	
 	
+	//phase1
 	//salesExecutive
 	//step1
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,27 +56,40 @@ public class Customer {
 	@OneToOne (cascade = CascadeType.ALL)
 	private GurantorDetails gurantorDetails;
 	
+	//phase 2
+	//step5
+	//Deligence Officer
+	private String deligenceStatus;
+	@OneToOne (cascade = CascadeType.ALL)
+	private DeligenceReport deligenceReport;
 	
+	//phase3
+	//step6
+	//Branch Manager
+	private String doReportBmResponseStatus;
+	private String doReportBmResponse;
+	
+	//phase 4
+	//step7
+	//Branch Manager
 	@OneToOne (cascade = CascadeType.ALL)
 	private SanctionLetter sanctionLetter;	
 	private String sanctionLetterStatus;
 	private String customerAcceptanceStatus;
 	
-	
+	//phase 5
+	//step8
 	//Deligence Officer
-	private String deligenceStatus;
 	private String loanAgreementStatus;	
 	@OneToOne (cascade = CascadeType.ALL)
-	private DeligenceReport deligenceReport;
-	@OneToOne (cascade = CascadeType.ALL)
 	private LoanAgreement loanAgreement;	
-	
-	//Branch Manager
-	private String doReportBmResponseStatus;
-	private String doReportBmResponse;
+
+	//phase 6
+	//step9
 	private String loanAgreementBmSignStatus;
-	private String loanAgreementCustomerSignStatus;
-	
+
+	//phase 7
+	//step 10
 	//Account Manager
 	private String loanDisbursementStatus;
 	@OneToOne (cascade = CascadeType.ALL)
@@ -83,4 +97,5 @@ public class Customer {
 	
 
 	
+//	private String loanAgreementCustomerSignStatus;
 }
