@@ -296,6 +296,42 @@ public class CustomerController {
 		Profession pf = new Profession();
 		c.setProfession(pf);
 		
+		AllPersonalDocuments apd = new AllPersonalDocuments();
+		c.setAllPersonalDocuments(apd);
+		
+		CibilData cd = new CibilData();
+		c.setCibilDetails(cd);
+		
+		AccountDetails ad = new AccountDetails();
+		c.setAccountDetails(ad);
+		
+		PropertyInfo pi = new PropertyInfo();
+		c.setPropertyInfo(pi);
+		
+		PropertyAddress pa = new PropertyAddress();
+		pi.setPropertyAddress(pa);
+		
+		DeligenceReport dr = new DeligenceReport();
+		c.setDeligenceReport(dr);
+		
+		FinancialCheck fc = new FinancialCheck();
+		dr.setFinancialCheck(fc);
+		
+		FieldInvestigation fin = new FieldInvestigation();
+		dr.setFieldInvestigation(fin);
+		
+		TechnicalCheck tc = new TechnicalCheck();
+		dr.setTechnicalCheck(tc);
+		
+		SanctionLetter sl = new SanctionLetter();
+		c.setSanctionLetter(sl);
+		
+		LoanAgreement la = new LoanAgreement();
+		c.setLoanAgreement(la);
+		
+		LoanDisbursement ld = new LoanDisbursement();
+		c.setLoanDisbursement(ld);
+		
 //		System.out.println("HouseNumber in cla"+ cla.getCustomerAddress().getHouseNumber());
 //		System.out.println("HouseNumber in addr1" +addr1.getHouseNumber());
 		

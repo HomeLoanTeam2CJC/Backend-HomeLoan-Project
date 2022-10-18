@@ -2,6 +2,7 @@ package com.hexaware.hlmbackend.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -22,12 +23,16 @@ public class Step6Controller {
 	private HomeLoanServiceInterface hlsi;
 	
 	@PostMapping(value = "/PostStep6api")
-	public String InsertStep6Data(@RequestPart String customerApplication) throws JsonMappingException, JsonProcessingException
+	public String InsertStep6Data(@RequestPart String customerApplication,@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
 	{
 		ObjectMapper om = new ObjectMapper(); 
 		Customer cla = om.readValue(customerApplication, Customer.class);
 		
 		Customer c = new Customer();
+		
+		//Fetching customer from Database
+		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+		
 		c.setDoReportBmResponseStatus(cla.getDoReportBmResponseStatus());
 		c.setDoReportBmResponse(cla.getDoReportBmResponse());
 		

@@ -2,6 +2,7 @@ package com.hexaware.hlmbackend.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -17,21 +18,25 @@ import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/step10Api")
-public class step10Controller {
+public class Step10Controller {
 
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
 	@PostMapping(value = "/PostStep10api")
-	public String InsertStep7Data(@RequestPart String customerApplication) throws JsonMappingException, JsonProcessingException
+	public String InsertStep7Data(@RequestPart String customerApplication,@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
 	{
 		ObjectMapper om = new ObjectMapper(); 
 		Customer cla = om.readValue(customerApplication, Customer.class);
 		
 		Customer c = new Customer();
+		
+		//Fetching customer from Database
+		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+		
 		c.setLoanDisbursementStatus(cla.getLoanDisbursementStatus());
 		
-		LoanDisbursement ld = new LoanDisbursement();
+		LoanDisbursement ld = savedCustomer.getLoanDisbursement();
 		ld.setLoanNumber(cla.getLoanDisbursement().getLoanNumber());
 		ld.setAgreementDate(cla.getLoanDisbursement().getAgreementDate());
 		ld.setAmountPayType(cla.getLoanDisbursement().getAmountPayType());

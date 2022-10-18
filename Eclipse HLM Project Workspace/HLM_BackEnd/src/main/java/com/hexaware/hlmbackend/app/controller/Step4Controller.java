@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -31,14 +32,18 @@ public class Step4Controller {
 	@PostMapping("/postStep4")
 	public String insertStep4data(@RequestPart String customer,
 			@RequestPart(value = "propertyInfo.propertyDocuments") MultipartFile propertyDocuments,
-			@RequestPart(value = "propertyInfo.priceProofs") MultipartFile priceProofs
+			@RequestPart(value = "propertyInfo.priceProofs") MultipartFile priceProofs,
+			@PathVariable Integer savedCustomerId
 			) throws IOException {
 		
 		ObjectMapper om = new ObjectMapper(); 
 		
 		Customer cla=om.readValue(customer,Customer.class);
 		
-		CibilData cd = new CibilData();
+		//Fetching customer from Database
+		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+		
+		CibilData cd = savedCustomer.getCibilDetails();
 		
 		cd.setCibilScore(cla.getCibilDetails().getCibilScore());
 		cd.setCibilScoreDateTime(cla.getCibilDetails().getCibilScoreDateTime());
@@ -46,14 +51,14 @@ public class Step4Controller {
 		cd.setRemarksByOe(cla.getCibilDetails().getRemarksByOe());
 		
 		
-		AccountDetails ad = new AccountDetails();
+		AccountDetails ad = savedCustomer.getAccountDetails();
 		ad.setAccountType(cla.getAccountDetails().getAccountType());
 		ad.setAccountBalance(cla.getAccountDetails().getAccountBalance());
 		ad.setAccountHolderName(cla.getAccountDetails().getAccountHolderName());
 		ad.setAccountStatus(cla.getAccountDetails().getAccountStatus());
 		ad.setAccountNumber(cla.getAccountDetails().getAccountNumber());
 		
-		PropertyInfo pi = new PropertyInfo();
+		PropertyInfo pi = savedCustomer.getPropertyInfo();
 		
 		pi.setPropertyType(cla.getPropertyInfo().getPropertyType());
 		pi.setPropertyArea(cla.getPropertyInfo().getPropertyType());
@@ -63,7 +68,8 @@ public class Step4Controller {
 		pi.setPriceProofs(propertyDocuments.getBytes());
 		pi.setPropertyDocuments(priceProofs.getBytes());
 		
-		PropertyAddress pa = new PropertyAddress();
+		PropertyAddress pa = savedCustomer.getPropertyInfo().getPropertyAddress();
+		
 		pa.setAreaName(cla.getPropertyInfo().getPropertyAddress().getAreaName());
 		pa.setCityName(cla.getPropertyInfo().getPropertyAddress().getCityName());
 		pa.setDistrict(cla.getPropertyInfo().getPropertyAddress().getDistrict());

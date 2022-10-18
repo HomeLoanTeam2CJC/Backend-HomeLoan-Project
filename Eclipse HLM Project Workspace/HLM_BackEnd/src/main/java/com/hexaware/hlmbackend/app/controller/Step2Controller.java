@@ -55,8 +55,6 @@ public class Step2Controller {
 		
 		//FamilyInfo fin = om.readValue(step2,FamilyInfo.class);
 		
-		
-		
 		FamilyInfo fi = savedCustomer.getFamilyInfo();
 		fi.setFatherName(cla.getFamilyInfo().getFatherName());
 		fi.setMotherName(cla.getFamilyInfo().getMotherName());

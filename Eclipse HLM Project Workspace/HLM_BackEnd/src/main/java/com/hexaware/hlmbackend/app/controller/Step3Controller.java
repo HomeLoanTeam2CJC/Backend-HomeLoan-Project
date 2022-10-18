@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -36,15 +37,18 @@ public class Step3Controller {
 			@RequestPart(value="allPersonalDocuments.bankCheque")MultipartFile bankCheque,
 			@RequestPart(value="allPersonalDocuments.salarySlips")MultipartFile salarySlips,
 			@RequestPart(value = "propertyInfo.propertyDocuments") MultipartFile propertyDocuments,
-			@RequestPart(value = "propertyInfo.priceProofs") MultipartFile priceProofs
-			
+			@RequestPart(value = "propertyInfo.priceProofs") MultipartFile priceProofs,
+			@PathVariable Integer savedCustomerId
 			) throws IOException {
 		
 //		ObjectMapper om = new ObjectMapper(); 
 		
 //		Customer c = new Customer();
 		
-		AllPersonalDocuments apd =new AllPersonalDocuments();
+		//Fetching customer from Database
+		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+		
+		AllPersonalDocuments apd =savedCustomer.getAllPersonalDocuments();
 		apd.setAddressProof(addressProof.getBytes());
 		apd.setPanCard(panCard.getBytes());
 		apd.setIncomeTax(incomeTax.getBytes());
