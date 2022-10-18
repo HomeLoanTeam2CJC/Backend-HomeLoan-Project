@@ -12,6 +12,7 @@ import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
+import com.hexaware.hlmbackend.app.model.SanctionLetter;
 
 public interface HomeLoanServiceInterface {
 
@@ -40,6 +41,10 @@ public interface HomeLoanServiceInterface {
 	void insertAccountDetails(AccountDetails ad);
 
 	void insertPropertyInfo(PropertyInfo pi);
+
+	void insertStep5Data(SanctionLetter sl);
+
+	//void insertCustomerStep5Data(Customer c);
 
 	
 

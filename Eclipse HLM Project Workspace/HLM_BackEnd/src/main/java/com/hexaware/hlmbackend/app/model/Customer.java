@@ -53,13 +53,13 @@ public class Customer {
 	@OneToOne (cascade = CascadeType.ALL)
 	private GurantorDetails gurantorDetails;
 	
-	
+	//step5
 	@OneToOne (cascade = CascadeType.ALL)
 	private SanctionLetter sanctionLetter;	
 	private String sanctionLetterStatus;
 	private String customerAcceptanceStatus;
 	
-	
+	//step6
 	//Deligence Officer
 	private String deligenceStatus;
 	private String loanAgreementStatus;	
@@ -68,12 +68,14 @@ public class Customer {
 	@OneToOne (cascade = CascadeType.ALL)
 	private LoanAgreement loanAgreement;	
 	
+	//step7
 	//Branch Manager
 	private String doReportBmResponseStatus;
 	private String doReportBmResponse;
 	private String loanAgreementBmSignStatus;
 	private String loanAgreementCustomerSignStatus;
 	
+	//step8
 	//Account Manager
 	private String loanDisbursementStatus;
 	@OneToOne (cascade = CascadeType.ALL)

@@ -16,6 +16,7 @@ import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
+import com.hexaware.hlmbackend.app.model.SanctionLetter;
 import com.hexaware.hlmbackend.app.repository.AccountDetailsRepository;
 import com.hexaware.hlmbackend.app.repository.AddressRepository;
 import com.hexaware.hlmbackend.app.repository.CibilDataRepository;
@@ -25,6 +26,7 @@ import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.repository.FamilyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.ProfessionRepository;
 import com.hexaware.hlmbackend.app.repository.PropertyInfoRepository;
+import com.hexaware.hlmbackend.app.repository.SanctionLetterRepository;
 import com.hexaware.hlmbackend.app.repository.documentsUploadRepository;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
@@ -62,8 +64,8 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	@Autowired
 	private PropertyInfoRepository propertyRepo;
 	
-//	@Autowired
-//	private 
+	@Autowired
+	private SanctionLetterRepository sanctionRepo;
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
@@ -162,6 +164,14 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		
 	}
 
+	@Override
+	public void insertStep5Data(SanctionLetter sl) {
+		sanctionRepo.save(sl);
+		
+	}
+
+	
+	
 
 
 
