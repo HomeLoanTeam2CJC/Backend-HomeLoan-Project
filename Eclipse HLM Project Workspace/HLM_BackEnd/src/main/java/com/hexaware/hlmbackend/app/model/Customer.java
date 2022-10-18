@@ -13,11 +13,13 @@ import lombok.Data;
 @Entity
 public class Customer {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	
 	//salesExecutive
 	//step1
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//Id is being generated & assigned manually
+	@Id
 	private Integer customerId;
 	private String customerName;
 	private String customerDateOfBirth;
@@ -79,11 +81,6 @@ public class Customer {
 	@OneToOne (cascade = CascadeType.ALL)
 	private LoanDisbursement loanDisbursement;
 	
-	
-	
 
-
-	
-	
 	
 }

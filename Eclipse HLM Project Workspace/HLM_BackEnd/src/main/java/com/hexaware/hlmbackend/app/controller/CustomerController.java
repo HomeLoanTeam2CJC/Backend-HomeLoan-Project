@@ -7,6 +7,7 @@ import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -177,8 +178,8 @@ public class CustomerController {
 		GurantorDetails gd = new GurantorDetails();
 		gd.setGurantorName(cla.getGurantorDetails().getGurantorName());
 		gd.setGurantorDateOfBirth(cla.getGurantorDetails().getGurantorDateOfBirth());
-		gd.setGurantorrelationship(cla.getGurantorDetails().getGurantorrelationship());
-		gd.setGurantorMobileNo(cla.getGurantorDetails().getGurantorMobileNo());
+		gd.setGurantorRelationship(cla.getGurantorDetails().getGurantorRelationship());
+		gd.setGurantorMobileNumber(cla.getGurantorDetails().getGurantorMobileNumber());
 		gd.setGurantorAadharCardNo(cla.getGurantorDetails().getGurantorAadharCardNo());
 		gd.setGurantorAddress(cla.getGurantorDetails().getGurantorAddress());
 		
@@ -189,7 +190,8 @@ public class CustomerController {
 		
 		FieldInvestigation fin=new FieldInvestigation();
 		fin.setAddressValidity(cla.getDeligenceReport().getFieldInvestigation().getAddressValidity());
-		fin.setCompanyDetailValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailValidity());
+		fin.setContactDetailsValidity(cla.getDeligenceReport().getFieldInvestigation().getContactDetailsValidity());
+		fin.setCompanyDetailsValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailsValidity());
 		fin.setPropertyLegality(cla.getDeligenceReport().getFieldInvestigation().getPropertyLegality());	
 		
 		dr.setFinancialCheck(cla.getDeligenceReport().getFinancialCheck());
@@ -226,7 +228,7 @@ public class CustomerController {
 		la.setRateOfInterest(cla.getLoanAgreement().getRateOfInterest());
 		la.setLoanTenure(cla.getLoanAgreement().getLoanTenure());
 		la.setMonthlyEmiAmount(cla.getLoanAgreement().getMonthlyEmiAmount());
-		la.setModeOPayment(cla.getLoanAgreement().getModeOPayment());
+		la.setModeOfPayment(cla.getLoanAgreement().getModeOfPayment());
 		la.setRemarks(cla.getLoanAgreement().getRemarks());
 		la.setStatus(cla.getLoanAgreement().getStatus());
 		
@@ -252,13 +254,16 @@ public class CustomerController {
 		return msg;
 	}
 
-	@PostMapping("/postStep1")
-	public String saveStep1(@RequestPart String customerApplication) throws JsonMappingException, JsonProcessingException {
+	@PostMapping("/postStep1/{savedCustomerId}")
+	public String saveStep1(
+			@RequestPart String customerApplication,
+			@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException {
 		
 		ObjectMapper om = new ObjectMapper(); 
 		Customer cla = om.readValue(customerApplication, Customer.class);
 		
 		Customer c = new Customer();
+		c.setCustomerId(savedCustomerId);
 		
 		c.setCustomerName(cla.getCustomerName());
 		c.setCustomerDateOfBirth(cla.getCustomerDateOfBirth());
@@ -271,13 +276,28 @@ public class CustomerController {
 		c.setCustomerTotalLoanRequired(cla.getCustomerTotalLoanRequired());
 		
 		Address addr1 = new Address();
-		addr1.setHouseNumber(c.getCustomerAddress().getHouseNumber());
-		addr1.setStreetName(c.getCustomerAddress().getStreetName());
-		addr1.setAreaName(c.getCustomerAddress().getAreaName());
-		addr1.setCityName(c.getCustomerAddress().getCityName());
-		addr1.setDistrict(c.getCustomerAddress().getDistrict());
-		addr1.setState(c.getCustomerAddress().getState());
-		addr1.setPincode(c.getCustomerAddress().getPincode());
+		addr1.setHouseNumber(cla.getCustomerAddress().getHouseNumber());
+		addr1.setStreetName(cla.getCustomerAddress().getStreetName());
+		addr1.setAreaName(cla.getCustomerAddress().getAreaName());
+		addr1.setCityName(cla.getCustomerAddress().getCityName());
+		addr1.setDistrict(cla.getCustomerAddress().getDistrict());
+		addr1.setState(cla.getCustomerAddress().getState());
+		addr1.setPincode(cla.getCustomerAddress().getPincode());
+		
+		c.setCustomerAddress(addr1);
+		
+		
+		FamilyInfo fi = new FamilyInfo();
+		c.setFamilyInfo(fi);
+		
+		EducationalInfo ei = new EducationalInfo();
+		c.setEducationalInfo(ei);
+		
+		Profession pf = new Profession();
+		c.setProfession(pf);
+		
+//		System.out.println("HouseNumber in cla"+ cla.getCustomerAddress().getHouseNumber());
+//		System.out.println("HouseNumber in addr1" +addr1.getHouseNumber());
 		
 		hlsi.insertCustomerApplication(c);
 		

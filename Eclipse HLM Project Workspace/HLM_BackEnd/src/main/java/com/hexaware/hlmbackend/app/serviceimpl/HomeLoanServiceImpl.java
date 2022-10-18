@@ -122,12 +122,14 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		educationRepo.save(ei);
 	}
 
+	
+	//To get enquiryObject from DB and extract Pancard file from it
 	@Override
 	public EnquiryForm getPancard(Integer enquiryId) {
 		
-		Optional<EnquiryForm> enquiryForPnacrd = enquiryRepo.findById(enquiryId);
-		if(enquiryForPnacrd.isPresent()) {
-			return enquiryForPnacrd.get();
+		Optional<EnquiryForm> enquiryForPancard = enquiryRepo.findById(enquiryId);
+		if(enquiryForPancard.isPresent()) {
+			return enquiryForPancard.get();
 			}
 		else {
 			return null;
@@ -160,6 +162,19 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		
 		propertyRepo.save(pi);
 		
+	}
+
+	@Override
+	public Customer getSavedCustomer(Integer savedCustomerId) {
+		
+		Optional<Customer> fetchedCustomer = customerRepo.findById(savedCustomerId);
+		
+		if(fetchedCustomer.isPresent()) {
+			return fetchedCustomer.get();
+		}
+		else {
+		return null;
+		}
 	}
 
 

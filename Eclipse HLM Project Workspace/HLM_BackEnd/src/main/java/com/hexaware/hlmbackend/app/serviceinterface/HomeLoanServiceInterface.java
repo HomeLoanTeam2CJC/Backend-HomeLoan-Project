@@ -41,6 +41,8 @@ public interface HomeLoanServiceInterface {
 
 	void insertPropertyInfo(PropertyInfo pi);
 
+	Customer getSavedCustomer(Integer savedCustomerId);
+
 	
 
 	

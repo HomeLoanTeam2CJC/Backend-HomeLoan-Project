@@ -14,6 +14,7 @@ public class FieldInvestigation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Integer fieldInvestigationId;
 	 private String addressValidity;
-	 private String companyDetailValidity;
+	 private String contactDetailsValidity;
+	 private String companyDetailsValidity;
 	 private String propertyLegality;
 }

@@ -2,6 +2,8 @@ package com.hexaware.hlmbackend.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -26,20 +28,36 @@ public class Step2Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping("/postStep2")
-	public String saveStep2(@RequestPart String customer) throws JsonMappingException, JsonProcessingException {
+	@PostMapping("/postStep2/{savedCustomerId}")
+	public String saveStep2(
+			@RequestPart String customerApplication,
+			@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException {
 		
 		ObjectMapper om = new ObjectMapper(); 
 		
-		Customer cla=om.readValue(customer,Customer.class);
-				
-		EducationalInfo ei = new EducationalInfo();
-
+		Customer cla=om.readValue(customerApplication,Customer.class);
+//		Customer c = new Customer();
+		
+		System.out.println("Saved customer Id :"+savedCustomerId);
+		
+		//Fetching customer from Database
+		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+		
+		//Fetching
+		EducationalInfo ei = savedCustomer.getEducationalInfo();
+		
+		
+//		EducationalInfo ei = new EducationalInfo();
+		
 		ei.setEducationType(cla.getEducationalInfo().getEducationType());
+		//new changes for bidirectional
+		ei.setCustomer(savedCustomer);
 		
 		//FamilyInfo fin = om.readValue(step2,FamilyInfo.class);
 		
-		FamilyInfo fi = new FamilyInfo();
+		
+		
+		FamilyInfo fi = savedCustomer.getFamilyInfo();
 		fi.setFatherName(cla.getFamilyInfo().getFatherName());
 		fi.setMotherName(cla.getFamilyInfo().getMotherName());
 		fi.setSpouseName(cla.getFamilyInfo().getSpouseName());
@@ -48,13 +66,18 @@ public class Step2Controller {
 		fi.setMaritalStatus(cla.getFamilyInfo().getMaritalStatus());
 		fi.setFamilyIncome(cla.getFamilyInfo().getFamilyIncome());
 		
+		//new changes for bidirectional
+		fi.setCustomer(savedCustomer);
+		
 	//	Profession p=om.readValue(step2, Profession.class);
 		
-		Profession pf = new Profession();
+		Profession pf = savedCustomer.getProfession();
 		pf.setProfessionType(cla.getProfession().getProfessionType());
 		pf.setProfessionDesignation(cla.getProfession().getProfessionDesignation());
 		pf.setProfessionSalary(cla.getProfession().getProfessionSalary());
 		
+		//new changes for bidirectional
+		pf.setCustomer(savedCustomer);
 		
 		hlsi.insertCustomerEducation(ei);
 		hlsi.insertCustomerFamilyInfo(fi);
@@ -63,5 +86,12 @@ public class Step2Controller {
 		return "Step2 Successfull";
 		
 	}
+	
+	
+//	@GetMapping("/getCustomer/{customerId}")
+//	public Customer getCustomer() {
+//		
+//		return null;
+//	}
 	
 }

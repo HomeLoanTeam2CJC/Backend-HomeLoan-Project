@@ -25,10 +25,7 @@ public class DeligenceReport {
 	@OneToOne(cascade = CascadeType.ALL)
 	private TechnicalCheck technicalCheck;
 	
-<<<<<<< HEAD
-=======
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "deligenceReport")
 	private Customer customer;
 	
->>>>>>> 9d53edb73bfe33e5b411011bce97a874d1920ce6
 }

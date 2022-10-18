@@ -23,7 +23,7 @@ public class LoanAgreement {
 	private Integer rateOfInterest;
 	private Integer loanTenure;
 	private Double monthlyEmiAmount;
-	private String modeOPayment;
+	private String modeOfPayment;
 	private String remarks;
 	private String status;
 	
