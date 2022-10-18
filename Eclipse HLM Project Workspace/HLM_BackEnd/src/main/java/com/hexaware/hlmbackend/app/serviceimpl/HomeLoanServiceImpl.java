@@ -163,18 +163,6 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		
 	}
 
-	@Override
-	public Customer getSavedCustomer(Integer savedCustomerId) {
-		
-		Optional<Customer> fetchedCustomer = customerRepo.findById(savedCustomerId);
-		
-		if(fetchedCustomer.isPresent()) {
-			return fetchedCustomer.get();
-		}
-		else {
-		return null;
-		}
-	}
 
 	@Override
 	public Customer getSavedCustomer(Integer savedCustomerId) {

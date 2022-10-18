@@ -41,7 +41,7 @@ public class Step8Controller {
 		la.setRateOfInterest(cla.getLoanAgreement().getRateOfInterest());
 		la.setLoanTenure(cla.getLoanAgreement().getLoanTenure());
 		la.setMonthlyEmiAmount(cla.getLoanAgreement().getMonthlyEmiAmount());
-		la.setModeOPayment(cla.getLoanAgreement().getModeOPayment());
+		la.setModeOfPayment(cla.getLoanAgreement().getModeOfPayment());
 		la.setRemarks(cla.getLoanAgreement().getRemarks());
 		la.setStatus(cla.getLoanAgreement().getStatus());
 		

@@ -43,7 +43,7 @@ public class Step5Controller {
 		
 		FieldInvestigation fin=new FieldInvestigation();
 		fin.setAddressValidity(cla.getDeligenceReport().getFieldInvestigation().getAddressValidity());
-		fin.setCompanyDetailValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailValidity());
+		fin.setCompanyDetailsValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailsValidity());
 		fin.setPropertyLegality(cla.getDeligenceReport().getFieldInvestigation().getPropertyLegality());	
 		
 		dr.setFinancialCheck(cla.getDeligenceReport().getFinancialCheck());
