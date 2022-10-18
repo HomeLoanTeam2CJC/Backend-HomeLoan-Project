@@ -42,7 +42,19 @@ public interface HomeLoanServiceInterface {
 
 	void insertPropertyInfo(PropertyInfo pi);
 
-	void insertStep5Data(SanctionLetter sl);
+	String insertStep5Data(Customer c);
+
+	String insertStep6Data(Customer c);
+
+	String insertStep7Data(Customer c);
+
+	String insertStep8Data(Customer c);
+
+	String insertStep9Data(Customer c);
+
+	String insertstep10Data(Customer c);
+
+	
 
 	//void insertCustomerStep5Data(Customer c);
 

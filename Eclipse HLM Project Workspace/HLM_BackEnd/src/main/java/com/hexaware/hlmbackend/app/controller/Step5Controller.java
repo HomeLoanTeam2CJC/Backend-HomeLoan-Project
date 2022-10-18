@@ -14,7 +14,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.DeligenceReport;
+import com.hexaware.hlmbackend.app.model.FieldInvestigation;
+import com.hexaware.hlmbackend.app.model.FinancialCheck;
 import com.hexaware.hlmbackend.app.model.SanctionLetter;
+import com.hexaware.hlmbackend.app.model.TechnicalCheck;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
 @RestController
@@ -32,20 +36,32 @@ public class Step5Controller {
 		Customer cla = om.readValue(customerApplication, Customer.class);
 		
 		Customer c = new Customer();		
-		c.setSanctionLetterStatus(cla.getSanctionLetterStatus());
-		c.setCustomerAcceptanceStatus(cla.getCustomerAcceptanceStatus());
+		c.setDeligenceStatus(cla.getDeligenceStatus());
+	
+		DeligenceReport dr = new DeligenceReport();
+		dr.setFieldInvestigation(cla.getDeligenceReport().getFieldInvestigation());
 		
-		SanctionLetter sl = new SanctionLetter();
-		
-		sl.setSanctionDate(c.getSanctionLetter().getSanctionDate());
-		sl.setApplicantName(c.getSanctionLetter().getApplicantName());
-		sl.setContactDetails(c.getSanctionLetter().getContactDetails());
-		sl.setMaxSanctionAmount(c.getSanctionLetter().getMaxSanctionAmount());
-		sl.setMaxEmi(c.getSanctionLetter().getMaxEmi());
-		sl.setAverageTenure(c.getSanctionLetter().getAverageTenure());
-		sl.setValidity(c.getSanctionLetter().getValidity());
+		FieldInvestigation fin=new FieldInvestigation();
+		fin.setAddressValidity(cla.getDeligenceReport().getFieldInvestigation().getAddressValidity());
+		fin.setCompanyDetailValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailValidity());
+		fin.setPropertyLegality(cla.getDeligenceReport().getFieldInvestigation().getPropertyLegality());	
 		
-//	hlsi.insertStep5Data(c);
+		dr.setFinancialCheck(cla.getDeligenceReport().getFinancialCheck());
+		
+		FinancialCheck fc=new FinancialCheck();
+		fc.setCibilScore(cla.getDeligenceReport().getFinancialCheck().getCibilScore());
+		fc.setNetIncome(cla.getDeligenceReport().getFinancialCheck().getNetIncome());
+		
+		dr.setTechnicalCheck(cla.getDeligenceReport().getTechnicalCheck());
+		
+		TechnicalCheck tc=new TechnicalCheck();
+		tc.setPropertyVisit(cla.getDeligenceReport().getTechnicalCheck().getPropertyVisit());
+		tc.setPropertyValuation(cla.getDeligenceReport().getTechnicalCheck().getPropertyValuation());
+		
+		c.setDeligenceReport(dr);
+	
+		hlsi.insertStep5Data(c);
+		
 	return "Step5 saved";
 		
 	}

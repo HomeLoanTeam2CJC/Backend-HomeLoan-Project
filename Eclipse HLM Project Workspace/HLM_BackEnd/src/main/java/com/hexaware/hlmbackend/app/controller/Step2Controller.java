@@ -55,7 +55,6 @@ public class Step2Controller {
 		pf.setProfessionDesignation(cla.getProfession().getProfessionDesignation());
 		pf.setProfessionSalary(cla.getProfession().getProfessionSalary());
 		
-		
 		hlsi.insertCustomerEducation(ei);
 		hlsi.insertCustomerFamilyInfo(fi);
 		hlsi.insertCustomerProffesion(pf);

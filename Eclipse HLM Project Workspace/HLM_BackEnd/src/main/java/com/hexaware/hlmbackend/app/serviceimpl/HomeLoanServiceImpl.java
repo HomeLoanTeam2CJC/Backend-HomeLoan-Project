@@ -26,7 +26,6 @@ import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.repository.FamilyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.ProfessionRepository;
 import com.hexaware.hlmbackend.app.repository.PropertyInfoRepository;
-import com.hexaware.hlmbackend.app.repository.SanctionLetterRepository;
 import com.hexaware.hlmbackend.app.repository.documentsUploadRepository;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
@@ -64,8 +63,6 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	@Autowired
 	private PropertyInfoRepository propertyRepo;
 	
-	@Autowired
-	private SanctionLetterRepository sanctionRepo;
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
@@ -165,11 +162,75 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	}
 
 	@Override
-	public void insertStep5Data(SanctionLetter sl) {
-		sanctionRepo.save(sl);
+	public String insertStep5Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
 		
 	}
 
+	@Override
+	public String insertStep6Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+		
+	}
+
+	@Override
+	public String insertStep7Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	}
+
+	@Override
+	public String insertStep8Data(Customer c) {
+		
+
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	
+	}
+
+	@Override
+	public String insertStep9Data(Customer c) {
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	}
+
+	@Override
+	public String insertstep10Data(Customer c) {
+		
+		Customer c1 = customerRepo.save(c);		
+		if(c1!=null) {
+			return "Data Saved";
+		}else {
+			return "Failed to Insert";
+		}
+	}
+
+	
 	
 	
 

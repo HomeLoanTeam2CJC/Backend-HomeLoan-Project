@@ -86,7 +86,7 @@ public class CustomerController {
 		c.setCustomerAcceptanceStatus(cla.getCustomerAcceptanceStatus());
 		c.setLoanAgreementStatus(cla.getLoanAgreementStatus());
 		c.setLoanAgreementBmSignStatus(cla.getLoanAgreementBmSignStatus());
-		c.setLoanAgreementCustomerSignStatus(cla.getLoanAgreementCustomerSignStatus());
+//		c.setLoanAgreementCustomerSignStatus(cla.getLoanAgreementCustomerSignStatus());
 		c.setLoanDisbursementStatus(cla.getLoanDisbursementStatus());
 		
 		Address addr = new Address();
@@ -279,9 +279,10 @@ public class CustomerController {
 		addr1.setState(c.getCustomerAddress().getState());
 		addr1.setPincode(c.getCustomerAddress().getPincode());
 		
+		c.setCustomerAddress(addr1);
+		
 		hlsi.insertCustomerApplication(c);
-		
-		
+	
 		return "Step1 Scucccessfull";
 	}
 }

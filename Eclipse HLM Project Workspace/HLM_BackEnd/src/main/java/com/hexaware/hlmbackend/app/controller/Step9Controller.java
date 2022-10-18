@@ -15,24 +15,24 @@ import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/step6api")
-public class Step6Controller {
+@RequestMapping("/step9Api")
+public class Step9Controller {
 	
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping(value = "/PostStep6api")
-	public String InsertStep6Data(@RequestPart String customerApplication) throws JsonMappingException, JsonProcessingException
+	@PostMapping(value = "/PostStep9api")
+	public String InsertStep7Data(@RequestPart String customerApplication) throws JsonMappingException, JsonProcessingException
 	{
 		ObjectMapper om = new ObjectMapper(); 
 		Customer cla = om.readValue(customerApplication, Customer.class);
 		
 		Customer c = new Customer();
-		c.setDoReportBmResponseStatus(cla.getDoReportBmResponseStatus());
-		c.setDoReportBmResponse(cla.getDoReportBmResponse());
+		c.setLoanAgreementBmSignStatus(cla.getLoanAgreementBmSignStatus());
 		
-		hlsi.insertStep6Data(c);
+		hlsi.insertStep9Data(c);
 		
-		return "Step6 Saved";
+		return "Step9 Saved";
 	}
+
 }
