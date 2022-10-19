@@ -18,6 +18,6 @@ public class EducationalInfo {
 	private Integer educationId;
 	private String educationType;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "educationalInfo")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "educationalInfo")
+//	private Customer customer;
 }

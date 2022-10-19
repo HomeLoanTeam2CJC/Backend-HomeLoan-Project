@@ -28,7 +28,7 @@ public class LoanDisbursement {
 	private String paymentStatus;
 	private String amountPaidDate;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "loanDisbursement")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "loanDisbursement")
+//	private Customer customer;
 	
 }

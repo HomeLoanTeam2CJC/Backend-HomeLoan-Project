@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hexaware.hlmbackend.app.model.AccountDetails;
 import com.hexaware.hlmbackend.app.model.CibilData;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.GurantorDetails;
 import com.hexaware.hlmbackend.app.model.PropertyAddress;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
@@ -29,8 +30,8 @@ public class Step4Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping("/postStep4")
-	public String insertStep4data(@RequestPart String customer,
+	@PostMapping("/postStep4/{savedCustomerId}")
+	public String insertStep4data(@RequestPart String customerApplication,
 			@RequestPart(value = "propertyInfo.propertyDocuments") MultipartFile propertyDocuments,
 			@RequestPart(value = "propertyInfo.priceProofs") MultipartFile priceProofs,
 			@PathVariable Integer savedCustomerId
@@ -38,7 +39,7 @@ public class Step4Controller {
 		
 		ObjectMapper om = new ObjectMapper(); 
 		
-		Customer cla=om.readValue(customer,Customer.class);
+		Customer cla=om.readValue(customerApplication,Customer.class);
 		
 		//Fetching customer from Database
 		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
@@ -77,11 +78,22 @@ public class Step4Controller {
 		pa.setPincode(cla.getPropertyInfo().getPropertyAddress().getPincode());
 		pa.setStreetName(cla.getPropertyInfo().getPropertyAddress().getStreetName());
 		
+		
 		pi.setPropertyAddress(pa);
+		
+		GurantorDetails gd = savedCustomer.getGurantorDetails();
+		gd.setGurantorName(cla.getGurantorDetails().getGurantorName());
+		gd.setGurantorDateOfBirth(cla.getGurantorDetails().getGurantorDateOfBirth());
+		gd.setGurantorMobileNumber(cla.getGurantorDetails().getGurantorMobileNumber());
+		gd.setGurantorAadharCardNo(cla.getGurantorDetails().getGurantorAadharCardNo());
+		gd.setGurantorAddress(cla.getGurantorDetails().getGurantorAddress());
+		gd.setGurantorRelationship(cla.getGurantorDetails().getGurantorRelationship());
+//		gd.setCustomer(savedCustomer);
 		
 		hlsi.insertCibilData(cd);
 		hlsi.insertAccountDetails(ad);
 		hlsi.insertPropertyInfo(pi);
+		hlsi.insertGurantor(gd);
 		
 		return "Step4 Successfull";
 	}

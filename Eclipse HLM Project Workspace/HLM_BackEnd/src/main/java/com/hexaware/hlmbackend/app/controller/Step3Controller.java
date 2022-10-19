@@ -25,7 +25,7 @@ public class Step3Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping(value = "/postStep3", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/postStep3/{savedCustomerId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String insertDocumentsApplication(
 			@RequestPart(value="allPersonalDocuments.addressProof")MultipartFile addressProof,
 			@RequestPart(value="allPersonalDocuments.panCard")MultipartFile panCard,
@@ -58,6 +58,9 @@ public class Step3Controller {
 		apd.setSignature(signature.getBytes());
 		apd.setBankCheque(bankCheque.getBytes());
 		apd.setSalarySlips(salarySlips.getBytes());
+		
+//		apd.setCustomer(savedCustomer);
+		
 		
 //		c.setAllPersonalDocuments(apd);
 		

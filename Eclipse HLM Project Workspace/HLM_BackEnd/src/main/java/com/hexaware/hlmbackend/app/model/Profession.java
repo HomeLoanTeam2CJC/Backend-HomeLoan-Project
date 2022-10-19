@@ -20,6 +20,6 @@ public class Profession {
 	private Double professionSalary;
 	private String professionDesignation;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "profession")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "profession")
+//	private Customer customer;
 }
