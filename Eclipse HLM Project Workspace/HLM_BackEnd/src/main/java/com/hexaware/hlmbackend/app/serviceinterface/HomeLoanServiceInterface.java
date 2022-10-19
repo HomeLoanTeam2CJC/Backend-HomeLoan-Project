@@ -11,6 +11,7 @@ import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.GurantorDetails;
+import com.hexaware.hlmbackend.app.model.Ledger;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
 import com.hexaware.hlmbackend.app.model.SanctionLetter;
@@ -61,6 +62,10 @@ public interface HomeLoanServiceInterface {
 	List<Customer> getCustomerList();
 
 	void insertGurantor(GurantorDetails gd);
+
+	Ledger savedLedgerData(Ledger ledgerId);
+
+	Ledger getLedgerData(Integer ledgerId);
 
 	
 

@@ -15,6 +15,7 @@ import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.GurantorDetails;
+import com.hexaware.hlmbackend.app.model.Ledger;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
 import com.hexaware.hlmbackend.app.model.SanctionLetter;
@@ -26,6 +27,7 @@ import com.hexaware.hlmbackend.app.repository.EducationInfoRepository;
 import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.repository.FamilyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.GurantorRepository;
+import com.hexaware.hlmbackend.app.repository.LedgerRepository;
 import com.hexaware.hlmbackend.app.repository.ProfessionRepository;
 import com.hexaware.hlmbackend.app.repository.PropertyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.documentsUploadRepository;
@@ -68,6 +70,8 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	@Autowired
 	private GurantorRepository gurantorRepo;
 	
+	@Autowired
+	private LedgerRepository ledgerRepo;  
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
@@ -263,6 +267,25 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	public void insertGurantor(GurantorDetails gd) {
 		
 		gurantorRepo.save(gd);
+		
+	}
+
+	@Override
+	public Ledger savedLedgerData(Ledger ledgerId) {
+		return ledgerRepo.save(ledgerId);
+		
+	}
+
+	@Override
+	public Ledger getLedgerData(Integer ledgerId) {
+		Optional<Ledger>  ledger=ledgerRepo.findById(ledgerId);
+		if(ledger.isPresent())
+		{
+			return ledger.get();
+		}
+		else {
+			return null;
+		}
 		
 	}
 
