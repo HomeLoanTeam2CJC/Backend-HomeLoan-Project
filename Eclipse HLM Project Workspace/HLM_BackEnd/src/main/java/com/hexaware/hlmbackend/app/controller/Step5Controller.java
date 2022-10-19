@@ -60,7 +60,6 @@ public class Step5Controller {
 			@PathVariable Integer savedCustomerId) throws IOException
 	{
 		ObjectMapper om = new ObjectMapper();
-		DeligenceReport cla = om.readValue(customerApplication, DeligenceReport.class);
 		
 		Customer c = new Customer();
 		
@@ -183,6 +182,9 @@ public class Step5Controller {
 		//need to set and get all fields of customer, from savedCustomer to Customer c
 		
 //		c.setDeligenceStatus(cla.getDeligenceStatus());
+		
+		DeligenceReport cla = om.readValue(customerApplication, DeligenceReport.class);
+
 	
 		DeligenceReport dr = savedCustomer.getDeligenceReport();
 	
