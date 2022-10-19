@@ -2,11 +2,13 @@ package com.hexaware.hlmbackend.app.controller;
 
 import java.io.IOException;
 import java.security.PublicKey;
+import java.util.List;
 
 import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +39,7 @@ import com.hexaware.hlmbackend.app.model.PropertyInfo;
 import com.hexaware.hlmbackend.app.model.SanctionLetter;
 import com.hexaware.hlmbackend.app.model.TechnicalCheck;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
+
 
 @RestController
 @CrossOrigin("*")
@@ -261,7 +264,6 @@ public class CustomerController {
 		
 		ObjectMapper om = new ObjectMapper(); 
 		Customer cla = om.readValue(customerApplication, Customer.class);
-		
 		Customer c = new Customer();
 		c.setCustomerId(savedCustomerId);
 		

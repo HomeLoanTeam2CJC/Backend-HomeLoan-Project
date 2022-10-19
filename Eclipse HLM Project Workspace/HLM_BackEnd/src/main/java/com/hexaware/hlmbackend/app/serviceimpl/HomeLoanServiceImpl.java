@@ -250,11 +250,6 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		}
 	}
 	
-		
-	}
-
-
-
 
 	@Override
 	public List<Customer> getCustomerList() {
@@ -272,7 +267,7 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	}
 
 	
-	
+}
 	
 
 

@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hexaware.hlmbackend.app.model.AllPersonalDocuments;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.EducationalInfo;
+import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
 @RestController
@@ -41,7 +43,7 @@ public class Step3Controller {
 			@PathVariable Integer savedCustomerId
 			) throws IOException {
 		
-//		ObjectMapper om = new ObjectMapper(); 7yy
+//		ObjectMapper om = new ObjectMapper(); 
 		
 //		Customer c = new Customer();
 		
