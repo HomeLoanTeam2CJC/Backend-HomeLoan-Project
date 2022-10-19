@@ -23,6 +23,6 @@ public class SanctionLetter {
 	private Integer averageTenure;
 	private Integer validity;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "sanctionLetter")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "sanctionLetter")
+//	private Customer customer;
 }

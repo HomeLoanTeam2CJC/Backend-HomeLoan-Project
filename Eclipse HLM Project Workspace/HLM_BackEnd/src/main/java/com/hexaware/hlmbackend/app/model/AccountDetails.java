@@ -23,7 +23,7 @@ public class AccountDetails {
 	private Long accountNumber;
 	
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "accountDetails")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "accountDetails")
+//	private Customer customer;
 	
 }

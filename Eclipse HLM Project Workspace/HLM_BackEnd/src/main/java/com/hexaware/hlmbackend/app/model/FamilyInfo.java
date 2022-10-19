@@ -24,7 +24,7 @@ public class FamilyInfo {
 	private String maritalStatus;
 	private Integer familyIncome;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "familyInfo")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "familyInfo")
+//	private Customer customer;
 	
 }

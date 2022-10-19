@@ -27,6 +27,6 @@ public class Address {
 	private String state;
 	private Integer pincode;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customerAddress")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customerAddress")
+//	private Customer customer;
 }

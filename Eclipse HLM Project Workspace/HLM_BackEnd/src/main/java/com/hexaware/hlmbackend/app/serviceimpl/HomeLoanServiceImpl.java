@@ -14,6 +14,7 @@ import com.hexaware.hlmbackend.app.model.Customer;
 import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
+import com.hexaware.hlmbackend.app.model.GurantorDetails;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
 import com.hexaware.hlmbackend.app.model.SanctionLetter;
@@ -24,6 +25,7 @@ import com.hexaware.hlmbackend.app.repository.CustomerRepository;
 import com.hexaware.hlmbackend.app.repository.EducationInfoRepository;
 import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.repository.FamilyInfoRepository;
+import com.hexaware.hlmbackend.app.repository.GurantorRepository;
 import com.hexaware.hlmbackend.app.repository.ProfessionRepository;
 import com.hexaware.hlmbackend.app.repository.PropertyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.documentsUploadRepository;
@@ -62,6 +64,9 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	
 	@Autowired
 	private PropertyInfoRepository propertyRepo;
+	
+	@Autowired
+	private GurantorRepository gurantorRepo;
 	
 
 	@Override
@@ -250,6 +255,21 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 
 
 
+
+	@Override
+	public List<Customer> getCustomerList() {
+		
+		List<Customer> customerList = customerRepo.findAll();
+		
+		return customerList;
+	}
+
+	@Override
+	public void insertGurantor(GurantorDetails gd) {
+		
+		gurantorRepo.save(gd);
+		
+	}
 
 	
 	

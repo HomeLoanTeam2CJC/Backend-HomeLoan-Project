@@ -51,7 +51,7 @@ public class Step2Controller {
 		
 		ei.setEducationType(cla.getEducationalInfo().getEducationType());
 		//new changes for bidirectional
-		ei.setCustomer(savedCustomer);
+//		ei.setCustomer(savedCustomer);
 		
 		//FamilyInfo fin = om.readValue(step2,FamilyInfo.class);
 		
@@ -65,7 +65,7 @@ public class Step2Controller {
 		fi.setFamilyIncome(cla.getFamilyInfo().getFamilyIncome());
 		
 		//new changes for bidirectional
-		fi.setCustomer(savedCustomer);
+//		fi.setCustomer(savedCustomer);
 		
 	//	Profession p=om.readValue(step2, Profession.class);
 		
@@ -75,7 +75,7 @@ public class Step2Controller {
 		pf.setProfessionSalary(cla.getProfession().getProfessionSalary());
 		
 		//new changes for bidirectional
-		pf.setCustomer(savedCustomer);
+//		pf.setCustomer(savedCustomer);
 		
 		hlsi.insertCustomerEducation(ei);
 		hlsi.insertCustomerFamilyInfo(fi);

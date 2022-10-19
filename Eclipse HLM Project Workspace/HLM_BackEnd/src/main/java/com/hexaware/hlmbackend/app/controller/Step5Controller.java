@@ -24,44 +24,61 @@ import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/step5api")
+@RequestMapping("/step5Api")
 
 public class Step5Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping("/postStep5")
-	public String InsertStep5Data(@RequestPart String customerApplication,@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
+	@PostMapping("/postStep5/{savedCustomerId}")
+	public String InsertStep5Data(
+			@RequestPart String customerApplication,
+			@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
 	{
 		ObjectMapper om = new ObjectMapper(); 
-		Customer cla = om.readValue(customerApplication, Customer.class);
+		DeligenceReport cla = om.readValue(customerApplication, DeligenceReport.class);
 		
 		Customer c = new Customer();
 		
 		//Fetching customer from Database
 		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
 		
-		c.setDeligenceStatus(cla.getDeligenceStatus());
+		
+		c.setCustomerId(savedCustomerId);
+		c.setCustomerName(savedCustomer.getCustomerName());
+		c.setCustomerDateOfBirth(savedCustomer.getCustomerDateOfBirth());
+		
+		
+		
+		//need to set and get all fields of customer, from savedCustomer to Customer c
+		
+//		c.setDeligenceStatus(cla.getDeligenceStatus());
 	
 		DeligenceReport dr = savedCustomer.getDeligenceReport();
-		dr.setFieldInvestigation(cla.getDeligenceReport().getFieldInvestigation());
+		
 		
 		FieldInvestigation fin = savedCustomer.getDeligenceReport().getFieldInvestigation();
-		fin.setAddressValidity(cla.getDeligenceReport().getFieldInvestigation().getAddressValidity());
-		fin.setCompanyDetailsValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailsValidity());
-		fin.setPropertyLegality(cla.getDeligenceReport().getFieldInvestigation().getPropertyLegality());	
+		fin.setAddressValidity(cla.getFieldInvestigation().getAddressValidity());
+		fin.setCompanyDetailsValidity(cla.getFieldInvestigation().getCompanyDetailsValidity());
+		fin.setPropertyLegality(cla.getFieldInvestigation().getPropertyLegality());	
 		
-		dr.setFinancialCheck(cla.getDeligenceReport().getFinancialCheck());
+		dr.setFieldInvestigation(fin);
+		
+		
 		
 		FinancialCheck fc = savedCustomer.getDeligenceReport().getFinancialCheck();
-		fc.setCibilScore(cla.getDeligenceReport().getFinancialCheck().getCibilScore());
-		fc.setNetIncome(cla.getDeligenceReport().getFinancialCheck().getNetIncome());
+		fc.setCibilScore(cla.getFinancialCheck().getCibilScore());
+		fc.setNetIncome(cla.getFinancialCheck().getNetIncome());
 		
-		dr.setTechnicalCheck(cla.getDeligenceReport().getTechnicalCheck());
+		dr.setFinancialCheck(fc);
+		
+		
 		
 		TechnicalCheck tc = savedCustomer.getDeligenceReport().getTechnicalCheck();
-		tc.setPropertyVisit(cla.getDeligenceReport().getTechnicalCheck().getPropertyVisit());
-		tc.setPropertyValuation(cla.getDeligenceReport().getTechnicalCheck().getPropertyValuation());
+		tc.setPropertyVisit(cla.getTechnicalCheck().getPropertyVisit());
+		tc.setPropertyValuation(cla.getTechnicalCheck().getPropertyValuation());
+		
+		dr.setTechnicalCheck(tc);
 		
 		c.setDeligenceReport(dr);
 	

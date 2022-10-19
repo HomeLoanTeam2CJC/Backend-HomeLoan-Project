@@ -27,8 +27,8 @@ public class LoanAgreement {
 	private String remarks;
 	private String status;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "loanAgreement")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "loanAgreement")
+//	private Customer customer;
 	
 	
 }

@@ -2,13 +2,11 @@ package com.hexaware.hlmbackend.app.controller;
 
 import java.io.IOException;
 import java.security.PublicKey;
-import java.util.List;
 
 import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -308,22 +306,23 @@ public class CustomerController {
 		c.setAccountDetails(ad);
 		
 		PropertyInfo pi = new PropertyInfo();
-		c.setPropertyInfo(pi);
-		
 		PropertyAddress pa = new PropertyAddress();
 		pi.setPropertyAddress(pa);
+		c.setPropertyInfo(pi);
+		
+		GurantorDetails gd = new GurantorDetails();
+		c.setGurantorDetails(gd);
 		
 		DeligenceReport dr = new DeligenceReport();
-		c.setDeligenceReport(dr);
-		
 		FinancialCheck fc = new FinancialCheck();
 		dr.setFinancialCheck(fc);
-		
 		FieldInvestigation fin = new FieldInvestigation();
 		dr.setFieldInvestigation(fin);
-		
 		TechnicalCheck tc = new TechnicalCheck();
 		dr.setTechnicalCheck(tc);
+		c.setDeligenceReport(dr);
+		
+		
 		
 		SanctionLetter sl = new SanctionLetter();
 		c.setSanctionLetter(sl);
@@ -343,6 +342,20 @@ public class CustomerController {
 	
 		return "Step1 Scucccessfull";
 	}
+	
+	
+	@GetMapping("/getCustomerList")
+	public List<Customer> getCustomerList(){
+		
+		List<Customer> customerList = hlsi.getCustomerList();
+		
+		for(Customer c : customerList) {
+			System.out.println(c.getCustomerName());
+			System.out.println(c.getCustomerId());
+		}
+		return customerList;
+	}
+	
 	
 	
 }

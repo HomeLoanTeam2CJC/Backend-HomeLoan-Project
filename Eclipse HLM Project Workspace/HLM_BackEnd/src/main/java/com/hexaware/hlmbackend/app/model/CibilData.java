@@ -24,7 +24,7 @@ public class CibilData {
 	private String status;
 	private String remarksByOe;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "cibilDetails")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "cibilDetails")
+//	private Customer customer;
 	
 }

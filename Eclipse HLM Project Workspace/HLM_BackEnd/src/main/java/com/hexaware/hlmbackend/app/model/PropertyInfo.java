@@ -28,8 +28,8 @@ public class PropertyInfo {
 	private byte[] priceProofs;
 	
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "propertyInfo")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "propertyInfo")
+//	private Customer customer;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private PropertyAddress propertyAddress;

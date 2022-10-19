@@ -22,6 +22,6 @@ public class GurantorDetails {
 	private Long gurantorAadharCardNo;
 	private String gurantorAddress;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "propertyInfo")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "propertyInfo")
+//	private Customer customer;
 }
