@@ -85,11 +85,4 @@ public class Step2Controller {
 		
 	}
 	
-	
-//	@GetMapping("/getCustomer/{customerId}")
-//	public Customer getCustomer() {
-//		
-//		return null;
-//	}
-	
 }

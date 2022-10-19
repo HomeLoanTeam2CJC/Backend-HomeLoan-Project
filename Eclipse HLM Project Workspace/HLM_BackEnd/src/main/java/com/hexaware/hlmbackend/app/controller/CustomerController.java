@@ -2,11 +2,13 @@ package com.hexaware.hlmbackend.app.controller;
 
 import java.io.IOException;
 import java.security.PublicKey;
+import java.util.List;
 
 import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -341,4 +343,6 @@ public class CustomerController {
 	
 		return "Step1 Scucccessfull";
 	}
+	
+	
 }
