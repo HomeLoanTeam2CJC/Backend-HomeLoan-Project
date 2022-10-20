@@ -114,6 +114,9 @@ public class Step6Controller {
 				SanctionLetter sl = savedCustomer.getSanctionLetter();
 				c.setSanctionLetter(sl);
 				
+				c.setLoanAgreement(savedCustomer.getLoanAgreement());
+				c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
+				
 		//Current step: step6 {note: Every time you copy paste this next step,
 //								change "cla." into "savedCustomer."}
 				c.setDoReportBmResponseStatus(cla.getDoReportBmResponseStatus());
