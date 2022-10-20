@@ -104,7 +104,7 @@ public class Step5Controller {
 		
 //		//step3
 		AllPersonalDocuments apd =savedCustomer.getAllPersonalDocuments();
-		apd.setAddressProof(savedCustomer.getAllPersonalDocuments().getAddressProof());
+//		apd.setAddressProof(savedCustomer.getAllPersonalDocuments().getAddressProof());
 //		apd.setPanCard(panCard.getBytes());
 //		apd.setIncomeTax(incomeTax.getBytes());
 //		apd.setAadharCard(aadharCard.getBytes());
