@@ -112,7 +112,12 @@ public class Step5Point5Controller {
 				
 				
 		//Current Step: Step5Point5
+				
+				System.out.println("Saved customer: "+savedCustomer.getSanctionLetter().getSanctionId());
 				SanctionLetter sl = savedCustomer.getSanctionLetter();
+				System.out.println("sl.getSanctionId: "+sl.getSanctionId());
+				
+				sl.setSanctionId(savedCustomer.getSanctionLetter().getSanctionId());
 				sl.setSanctionDate(cla.getSanctionLetter().getSanctionDate());
 				sl.setApplicantName(cla.getSanctionLetter().getApplicantName());
 				sl.setContactDetails(cla.getSanctionLetter().getContactDetails());
@@ -123,6 +128,11 @@ public class Step5Point5Controller {
 				
 				c.setSanctionLetter(sl);
 				c.setSanctionLetterStatus(cla.getSanctionLetterStatus());
+				
+				
+				
+				c.setLoanAgreement(savedCustomer.getLoanAgreement());
+				c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
 				
 				
 				hlsi.insertStep5Point5Data(c);

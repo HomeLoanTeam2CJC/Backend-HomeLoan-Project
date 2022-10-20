@@ -47,17 +47,16 @@ public interface HomeLoanServiceInterface {
 	Customer getSavedCustomer(Integer savedCustomerId);
 	
 	String insertStep5Data(Customer c);
+	
+	String insertStep5Point5Data(Customer c);
 
 	String insertStep6Data(Customer c);
 
-	String insertStep5Point5Data(Customer c);
-
-	String insertStep8Data(Customer c);
+	String insertStep7Data(Customer c);
 
 	String insertStep9Data(Customer c);
 
 	String insertstep10Data(Customer c);
-
 
 	List<Customer> getCustomerList();
 

@@ -23,42 +23,50 @@ public class Step8Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping(value = "/postStep8")
-	public String InsertStep7Data(@RequestPart String customerApplication,@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
+	@PostMapping(value = "/postStep8/{savedCustomerId}")
+	public String InsertStep7Data(
+			@RequestPart String customerApplication,
+			@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
 	{
-		ObjectMapper om = new ObjectMapper(); 
-		Customer cla = om.readValue(customerApplication, Customer.class);
+		//Converting JSON into POJO
+			ObjectMapper om = new ObjectMapper(); 
+			Customer cla = om.readValue(customerApplication, Customer.class);
 		
-		Customer c = new Customer();
+		
 		
 		//Fetching customer from Database
-		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+			Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+			Customer c = new Customer();
 		
-		//****************************
-		//Cut pasted from step7(now it is step5Point5)
-		c.setCustomerAcceptanceStatus(cla.getCustomerAcceptanceStatus());
-		//*****************************
 		
-		c.setLoanAgreementStatus(cla.getLoanAgreementStatus());
-		
-		LoanAgreement la = savedCustomer.getLoanAgreement();
-		
-		la.setLoanAgreementName(cla.getLoanAgreement().getApplicantName());
-		la.setApplicantName(cla.getLoanAgreement().getApplicantName());
-		la.setContactDetails(cla.getLoanAgreement().getContactDetails());
-		la.setLoanAmountSanctioned(cla.getLoanAgreement().getLoanAmountSanctioned());
-		la.setInterestType(cla.getLoanAgreement().getInterestType());
-		la.setRateOfInterest(cla.getLoanAgreement().getRateOfInterest());
-		la.setLoanTenure(cla.getLoanAgreement().getLoanTenure());
-		la.setMonthlyEmiAmount(cla.getLoanAgreement().getMonthlyEmiAmount());
-		la.setModeOfPayment(cla.getLoanAgreement().getModeOfPayment());
-		la.setRemarks(cla.getLoanAgreement().getRemarks());
-		la.setStatus(cla.getLoanAgreement().getStatus());
-		
-		c.setLoanAgreement(la);
-		
-		hlsi.insertStep8Data(c);
-		
-		return "Step8 Saved";
+			
+			
+			
+			
+			
+			
+		//Current Step		
+			
+			
+			LoanAgreement la = savedCustomer.getLoanAgreement();
+			
+			la.setLoanAgreementName(cla.getLoanAgreement().getApplicantName());
+			la.setApplicantName(cla.getLoanAgreement().getApplicantName());
+			la.setContactDetails(cla.getLoanAgreement().getContactDetails());
+			la.setLoanAmountSanctioned(cla.getLoanAgreement().getLoanAmountSanctioned());
+			la.setInterestType(cla.getLoanAgreement().getInterestType());
+			la.setRateOfInterest(cla.getLoanAgreement().getRateOfInterest());
+			la.setLoanTenure(cla.getLoanAgreement().getLoanTenure());
+			la.setMonthlyEmiAmount(cla.getLoanAgreement().getMonthlyEmiAmount());
+			la.setModeOfPayment(cla.getLoanAgreement().getModeOfPayment());
+			la.setRemarks(cla.getLoanAgreement().getRemarks());
+			la.setStatus(cla.getLoanAgreement().getStatus());
+			
+			c.setLoanAgreement(la);
+			c.setLoanAgreementStatus(cla.getLoanAgreementStatus());
+			
+			hlsi.insertStep7Data(c);
+			
+			return "Step8 Saved";
 	}
 }

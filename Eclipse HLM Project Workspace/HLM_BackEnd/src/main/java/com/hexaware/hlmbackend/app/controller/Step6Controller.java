@@ -25,6 +25,7 @@ import com.hexaware.hlmbackend.app.model.GurantorDetails;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyAddress;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
+import com.hexaware.hlmbackend.app.model.SanctionLetter;
 import com.hexaware.hlmbackend.app.model.TechnicalCheck;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
@@ -107,6 +108,11 @@ public class Step6Controller {
 				
 				c.setDeligenceReportStatus(savedCustomer.getDeligenceReportStatus());
 				
+				
+				
+		//step5.5 
+				SanctionLetter sl = savedCustomer.getSanctionLetter();
+				c.setSanctionLetter(sl);
 				
 		//Current step: step6 {note: Every time you copy paste this next step,
 //								change "cla." into "savedCustomer."}

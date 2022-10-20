@@ -48,13 +48,15 @@ public class Step5Controller {
 			@RequestPart String customerApplication,
 			@PathVariable Integer savedCustomerId) throws IOException
 	{
-		ObjectMapper om = new ObjectMapper();
-		
-		Customer c = new Customer();
+		//Converting JSON into POJO	
+			ObjectMapper om = new ObjectMapper();
+			Customer cla = om.readValue(customerApplication, Customer.class);
+			
 		
 		//Fetching customer from Database
-		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
-		
+			Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+			Customer c = new Customer();
+			
 		//step1
 		c.setCustomerId(savedCustomerId);
 		c.setCustomerName(savedCustomer.getCustomerName());
@@ -104,15 +106,7 @@ public class Step5Controller {
 		
 //		//step3
 		AllPersonalDocuments apd =savedCustomer.getAllPersonalDocuments();
-//		apd.setAddressProof(savedCustomer.getAllPersonalDocuments().getAddressProof());
-//		apd.setPanCard(panCard.getBytes());
-//		apd.setIncomeTax(incomeTax.getBytes());
-//		apd.setAadharCard(aadharCard.getBytes());
-//		apd.setPhoto(photo.getBytes());
-//		apd.setThumbPrint(thumbPrint.getBytes());
-//		apd.setSignature(signature.getBytes());
-//		apd.setBankCheque(bankCheque.getBytes());
-//		apd.setSalarySlips(salarySlips.getBytes());
+		c.setAllPersonalDocuments(apd);
 		
 		//step4
 		
@@ -171,9 +165,6 @@ public class Step5Controller {
 		//need to set and get all fields of customer, from savedCustomer to Customer c
 		
 		
-		
-		Customer cla = om.readValue(customerApplication, Customer.class);
-		
 	
 		DeligenceReport dr = savedCustomer.getDeligenceReport();
 		
@@ -198,6 +189,11 @@ public class Step5Controller {
 		
 		c.setDeligenceReport(dr);
 		c.setDeligenceReportStatus(cla.getDeligenceReportStatus());
+		
+		
+		c.setSanctionLetter(savedCustomer.getSanctionLetter());
+		c.setLoanAgreement(savedCustomer.getLoanAgreement());
+		c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
 	
 		hlsi.insertStep5Data(c);
 		
