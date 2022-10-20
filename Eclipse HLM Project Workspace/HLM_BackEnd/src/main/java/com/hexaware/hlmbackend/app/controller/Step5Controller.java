@@ -43,20 +43,9 @@ public class Step5Controller {
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping(value = "/postStep5/{savedCustomerId}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/postStep5/{savedCustomerId}")
 	public String InsertStep5Data(
 			@RequestPart String customerApplication,
-			@RequestPart(value="allPersonalDocuments.addressProof")MultipartFile addressProof,
-			@RequestPart(value="allPersonalDocuments.panCard")MultipartFile panCard,
-			@RequestPart(value="allPersonalDocuments.incomeTax")MultipartFile incomeTax,
-			@RequestPart(value="allPersonalDocuments.aadharCard")MultipartFile aadharCard,
-			@RequestPart(value="allPersonalDocuments.photo")MultipartFile photo,
-			@RequestPart(value="allPersonalDocuments.thumbPrint")MultipartFile thumbPrint,
-			@RequestPart(value="allPersonalDocuments.signature")MultipartFile signature,
-			@RequestPart(value="allPersonalDocuments.bankCheque")MultipartFile bankCheque,
-			@RequestPart(value="allPersonalDocuments.salarySlips")MultipartFile salarySlips,
-			@RequestPart(value = "propertyInfo.propertyDocuments") MultipartFile propertyDocuments,
-			@RequestPart(value = "propertyInfo.priceProofs") MultipartFile priceProofs,
 			@PathVariable Integer savedCustomerId) throws IOException
 	{
 		ObjectMapper om = new ObjectMapper();
@@ -81,8 +70,8 @@ public class Step5Controller {
 		Address addr1 =  savedCustomer.getCustomerAddress();
 		addr1.setHouseNumber(savedCustomer.getCustomerAddress().getHouseNumber());
 		addr1.setStreetName(savedCustomer.getCustomerAddress().getStreetName());
-		addr1.setAreaName(savedCustomer.getCustomerAddress().getAreaName());
-		addr1.setCityName(savedCustomer.getCustomerAddress().getCityName());
+//		addr1.setAreaName(savedCustomer.getCustomerAddress().getAreaName()); //Trial to check if it gets null value or keeps the old value
+//		addr1.setCityName(savedCustomer.getCustomerAddress().getCityName());
 		addr1.setDistrict(savedCustomer.getCustomerAddress().getDistrict());
 		addr1.setState(savedCustomer.getCustomerAddress().getState());
 		addr1.setPincode(savedCustomer.getCustomerAddress().getPincode());
@@ -113,17 +102,17 @@ public class Step5Controller {
 		
 		c.setProfession(pf);
 		
-		//step3
+//		//step3
 		AllPersonalDocuments apd =savedCustomer.getAllPersonalDocuments();
-		apd.setAddressProof(addressProof.getBytes());
-		apd.setPanCard(panCard.getBytes());
-		apd.setIncomeTax(incomeTax.getBytes());
-		apd.setAadharCard(aadharCard.getBytes());
-		apd.setPhoto(photo.getBytes());
-		apd.setThumbPrint(thumbPrint.getBytes());
-		apd.setSignature(signature.getBytes());
-		apd.setBankCheque(bankCheque.getBytes());
-		apd.setSalarySlips(salarySlips.getBytes());
+		apd.setAddressProof(savedCustomer.getAllPersonalDocuments().getAddressProof());
+//		apd.setPanCard(panCard.getBytes());
+//		apd.setIncomeTax(incomeTax.getBytes());
+//		apd.setAadharCard(aadharCard.getBytes());
+//		apd.setPhoto(photo.getBytes());
+//		apd.setThumbPrint(thumbPrint.getBytes());
+//		apd.setSignature(signature.getBytes());
+//		apd.setBankCheque(bankCheque.getBytes());
+//		apd.setSalarySlips(salarySlips.getBytes());
 		
 		//step4
 		
@@ -152,8 +141,8 @@ public class Step5Controller {
 		pi.setConstructionArea(savedCustomer.getPropertyInfo().getConstructionArea());
 		pi.setPropertyPrice(savedCustomer.getPropertyInfo().getPropertyPrice());
 		pi.setConstructionPrice(savedCustomer.getPropertyInfo().getConstructionPrice());
-		pi.setPriceProofs(propertyDocuments.getBytes());
-		pi.setPropertyDocuments(priceProofs.getBytes());
+//		pi.setPriceProofs(propertyDocuments.getBytes());
+//		pi.setPropertyDocuments(priceProofs.getBytes());
 		
 		PropertyAddress pa = savedCustomer.getPropertyInfo().getPropertyAddress();
 		
@@ -181,33 +170,34 @@ public class Step5Controller {
 		
 		//need to set and get all fields of customer, from savedCustomer to Customer c
 		
-//		c.setDeligenceStatus(cla.getDeligenceStatus());
 		
-		DeligenceReport cla = om.readValue(customerApplication, DeligenceReport.class);
-
+		
+		Customer cla = om.readValue(customerApplication, Customer.class);
+		
 	
 		DeligenceReport dr = savedCustomer.getDeligenceReport();
+		
+		dr.setDeligenceReportId(savedCustomer.getDeligenceReport().getDeligenceReportId());
 	
 		FieldInvestigation fin = savedCustomer.getDeligenceReport().getFieldInvestigation();
-		fin.setAddressValidity(cla.getFieldInvestigation().getAddressValidity());
-		fin.setCompanyDetailsValidity(cla.getFieldInvestigation().getCompanyDetailsValidity());
-		fin.setPropertyLegality(cla.getFieldInvestigation().getPropertyLegality());	
-		
+		fin.setAddressValidity(cla.getDeligenceReport().getFieldInvestigation().getAddressValidity());
+		fin.setContactDetailsValidity(cla.getDeligenceReport().getFieldInvestigation().getContactDetailsValidity());
+		fin.setCompanyDetailsValidity(cla.getDeligenceReport().getFieldInvestigation().getCompanyDetailsValidity());
+		fin.setPropertyLegality(cla.getDeligenceReport().getFieldInvestigation().getPropertyLegality());	
 		dr.setFieldInvestigation(fin);
 		
 		FinancialCheck fc = savedCustomer.getDeligenceReport().getFinancialCheck();
-		fc.setCibilScore(cla.getFinancialCheck().getCibilScore());
-		fc.setNetIncome(cla.getFinancialCheck().getNetIncome());
-		
+		fc.setCibilScore(cla.getDeligenceReport().getFinancialCheck().getCibilScore());
+		fc.setNetIncome(cla.getDeligenceReport().getFinancialCheck().getNetIncome());
 		dr.setFinancialCheck(fc);
 		
 		TechnicalCheck tc = savedCustomer.getDeligenceReport().getTechnicalCheck();
-		tc.setPropertyVisit(cla.getTechnicalCheck().getPropertyVisit());
-		tc.setPropertyValuation(cla.getTechnicalCheck().getPropertyValuation());
-		
+		tc.setPropertyVisit(cla.getDeligenceReport().getTechnicalCheck().getPropertyVisit());
+		tc.setPropertyValuation(cla.getDeligenceReport().getTechnicalCheck().getPropertyValuation());
 		dr.setTechnicalCheck(tc);
 		
 		c.setDeligenceReport(dr);
+		c.setDeligenceReportStatus(cla.getDeligenceReportStatus());
 	
 		hlsi.insertStep5Data(c);
 		

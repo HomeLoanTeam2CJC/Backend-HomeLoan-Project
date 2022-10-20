@@ -83,7 +83,7 @@ public class CustomerController {
 		c.setCustomerAmountPaidForHome(cla.getCustomerAmountPaidForHome());
 		c.setCustomerTotalLoanRequired(cla.getCustomerTotalLoanRequired());
 		
-		c.setDeligenceStatus(cla.getDeligenceStatus());
+		c.setDeligenceReportStatus(cla.getDeligenceReportStatus());
 		c.setDoReportBmResponseStatus(cla.getDoReportBmResponseStatus());
 		c.setDoReportBmResponse(cla.getDoReportBmResponse());
 		c.setSanctionLetterStatus(cla.getSanctionLetterStatus());

@@ -59,7 +59,7 @@ public class Customer {
 	//phase 2
 	//step5
 	//Deligence Officer
-	private String deligenceStatus;
+	private String deligenceReportStatus;
 	@OneToOne (cascade = CascadeType.ALL)
 	private DeligenceReport deligenceReport;
 	
