@@ -63,9 +63,10 @@ public class Customer {
 	@OneToOne (cascade = CascadeType.ALL)
 	private DeligenceReport deligenceReport;
 	
-	//step5.1
+	//step5.1 //Deligence Officer
 	@OneToOne (cascade = CascadeType.ALL)
 	private SanctionLetter sanctionLetter;
+	private String sanctionLetterStatus;
 	
 	//phase3
 	//step6
@@ -76,7 +77,7 @@ public class Customer {
 	//phase 4
 	//step7
 	//Sales executive
-	private String sanctionLetterStatus;
+	
 	private String customerAcceptanceStatus;
 	
 	//phase 5

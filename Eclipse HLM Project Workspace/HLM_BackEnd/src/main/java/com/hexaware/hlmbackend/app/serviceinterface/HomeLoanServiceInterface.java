@@ -50,7 +50,7 @@ public interface HomeLoanServiceInterface {
 
 	String insertStep6Data(Customer c);
 
-	String insertStep7Data(Customer c);
+	String insertStep5Point5Data(Customer c);
 
 	String insertStep8Data(Customer c);
 

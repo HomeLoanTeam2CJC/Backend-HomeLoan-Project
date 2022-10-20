@@ -210,7 +210,7 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	}
 
 	@Override
-	public String insertStep7Data(Customer c) {
+	public String insertStep5Point5Data(Customer c) {
 		
 		Customer c1 = customerRepo.save(c);		
 		if(c1!=null) {

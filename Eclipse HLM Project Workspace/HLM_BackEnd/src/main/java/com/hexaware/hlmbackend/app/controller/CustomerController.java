@@ -335,10 +335,7 @@ public class CustomerController {
 		LoanDisbursement ld = new LoanDisbursement();
 		c.setLoanDisbursement(ld);
 		
-//		System.out.println("HouseNumber in cla"+ cla.getCustomerAddress().getHouseNumber());
-//		System.out.println("HouseNumber in addr1" +addr1.getHouseNumber());
-		
-		c.setCustomerAddress(addr1);
+
 		
 		hlsi.insertCustomerApplication(c);
 	

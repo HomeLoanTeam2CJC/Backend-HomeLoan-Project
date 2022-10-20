@@ -25,31 +25,33 @@ import com.hexaware.hlmbackend.app.model.GurantorDetails;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyAddress;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
+import com.hexaware.hlmbackend.app.model.SanctionLetter;
 import com.hexaware.hlmbackend.app.model.TechnicalCheck;
 import com.hexaware.hlmbackend.app.serviceinterface.HomeLoanServiceInterface;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/step6Api")
-public class Step6Controller {
+@RequestMapping("/step5Point5Api")
+public class Step5Point5Controller {
 	
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
 	
-	@PostMapping("/postStep6/{savedCustomerId}")
-	public String InsertStep6Data(
+	@PostMapping("/postStep5Point5/{savedCustomerId}")
+	public String InsertStep5Point5Data(
 			@RequestPart String customerApplication,
 			@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
 	{
 		//Converting JSON into POJO
-				ObjectMapper om = new ObjectMapper(); 
-				Customer cla = om.readValue(customerApplication, Customer.class);
+		ObjectMapper om = new ObjectMapper(); 
+		Customer cla = om.readValue(customerApplication, Customer.class);
 		
-				
+		
 		
 		//Fetching customer from Database and assigning it to new empty Customer object
-				Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
-				Customer c = new Customer();
+		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+		Customer c = new Customer();
+		
 		//step1
 				c.setCustomerId(savedCustomerId);
 				c.setCustomerName(savedCustomer.getCustomerName());
@@ -106,17 +108,25 @@ public class Step6Controller {
 				c.setDeligenceReport(dr);
 				
 				c.setDeligenceReportStatus(savedCustomer.getDeligenceReportStatus());
-				
-				
-		//Current step: step6 {note: Every time you copy paste this next step,
-//								change "cla." into "savedCustomer."}
-				c.setDoReportBmResponseStatus(cla.getDoReportBmResponseStatus());
-				c.setDoReportBmResponse(cla.getDoReportBmResponse());
 		
 				
-		//Sending Customer c to DB		
-				hlsi.insertStep6Data(c);
-		
-				return "Step6 Saved";
+				
+		//Current Step: Step5Point5
+				SanctionLetter sl = savedCustomer.getSanctionLetter();
+				sl.setSanctionDate(cla.getSanctionLetter().getSanctionDate());
+				sl.setApplicantName(cla.getSanctionLetter().getApplicantName());
+				sl.setContactDetails(cla.getSanctionLetter().getContactDetails());
+				sl.setMaxSanctionAmount(cla.getSanctionLetter().getMaxSanctionAmount());
+				sl.setMaxEmi(cla.getSanctionLetter().getMaxEmi());
+				sl.setAverageTenure(cla.getSanctionLetter().getAverageTenure());
+				sl.setValidity(cla.getSanctionLetter().getValidity());
+				
+				c.setSanctionLetter(sl);
+				c.setSanctionLetterStatus(cla.getSanctionLetterStatus());
+				
+				
+				hlsi.insertStep5Point5Data(c);
+				return "Step5Point5 Saved";
 	}
+
 }

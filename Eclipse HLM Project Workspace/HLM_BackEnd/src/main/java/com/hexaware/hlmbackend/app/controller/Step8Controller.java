@@ -34,6 +34,11 @@ public class Step8Controller {
 		//Fetching customer from Database
 		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
 		
+		//****************************
+		//Cut pasted from step7(now it is step5Point5)
+		c.setCustomerAcceptanceStatus(cla.getCustomerAcceptanceStatus());
+		//*****************************
+		
 		c.setLoanAgreementStatus(cla.getLoanAgreementStatus());
 		
 		LoanAgreement la = savedCustomer.getLoanAgreement();
