@@ -2,11 +2,16 @@ package com.hexaware.hlmbackend.app.serviceinterface;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hexaware.hlmbackend.app.model.AccountDetails;
 import com.hexaware.hlmbackend.app.model.Address;
 import com.hexaware.hlmbackend.app.model.AllPersonalDocuments;
 import com.hexaware.hlmbackend.app.model.CibilData;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.CustomerEmail;
 import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
@@ -65,6 +70,8 @@ public interface HomeLoanServiceInterface {
 	Ledger savedLedgerData(Ledger ledgerId);
 
 	Ledger getLedgerData(Integer ledgerId);
+
+	void sendEmail(CustomerEmail custEmail, MultipartFile attachedFile) throws MessagingException ;
 
 	
 

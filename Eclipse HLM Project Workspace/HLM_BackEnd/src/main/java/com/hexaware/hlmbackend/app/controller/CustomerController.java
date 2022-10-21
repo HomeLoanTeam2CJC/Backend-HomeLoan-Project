@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.security.PublicKey;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +27,7 @@ import com.hexaware.hlmbackend.app.model.Address;
 import com.hexaware.hlmbackend.app.model.AllPersonalDocuments;
 import com.hexaware.hlmbackend.app.model.CibilData;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.CustomerEmail;
 import com.hexaware.hlmbackend.app.model.DeligenceReport;
 import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
@@ -49,6 +53,10 @@ public class CustomerController {
 	
 	@Autowired
 	private HomeLoanServiceInterface hlsi;
+	
+	
+	@Value("${spring.mail.username}")
+	private String sender;
 	
 	@PostMapping(value = "/newCustomerApplication", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String insertCustomerApplication(
@@ -359,6 +367,31 @@ public class CustomerController {
 	public Customer getCustomer(@PathVariable Integer customerId){
 		Customer c = hlsi.getSavedCustomer(customerId);
 		return c;
+	}
+	
+	
+	@RequestMapping(value = "/customerEmail/{savedCustomerId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public String sendCustomerEmail(
+			@RequestPart MultipartFile attachedFile,
+			@RequestPart String customerEmail,
+			@PathVariable Integer savedCustomerId) throws IOException, MessagingException {
+		
+		Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
+		
+		ObjectMapper om = new ObjectMapper();
+		CustomerEmail tempCustEmail = om.readValue(customerEmail, CustomerEmail.class);
+		
+		CustomerEmail custEmail = new CustomerEmail();
+		custEmail.setFromSender(sender);
+		custEmail.setToReceiver(savedCustomer.getCustomerEmail());
+		custEmail.setSubject(tempCustEmail.getSubject());
+		custEmail.setTextBody(tempCustEmail.getTextBody());
+		custEmail.setAttachment(attachedFile.getBytes());
+		
+		hlsi.sendEmail(custEmail, attachedFile);
+		
+		
+		return "Email Sent Succesfully";	
 	}
 	
 	

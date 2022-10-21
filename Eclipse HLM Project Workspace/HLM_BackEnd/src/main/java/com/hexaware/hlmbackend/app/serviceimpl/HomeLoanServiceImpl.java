@@ -3,14 +3,21 @@ package com.hexaware.hlmbackend.app.serviceimpl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hexaware.hlmbackend.app.model.AccountDetails;
 import com.hexaware.hlmbackend.app.model.Address;
 import com.hexaware.hlmbackend.app.model.AllPersonalDocuments;
 import com.hexaware.hlmbackend.app.model.CibilData;
 import com.hexaware.hlmbackend.app.model.Customer;
+import com.hexaware.hlmbackend.app.model.CustomerEmail;
 import com.hexaware.hlmbackend.app.model.EducationalInfo;
 import com.hexaware.hlmbackend.app.model.EnquiryForm;
 import com.hexaware.hlmbackend.app.model.FamilyInfo;
@@ -24,6 +31,7 @@ import com.hexaware.hlmbackend.app.repository.AddressRepository;
 import com.hexaware.hlmbackend.app.repository.CibilDataRepository;
 import com.hexaware.hlmbackend.app.repository.CustomerRepository;
 import com.hexaware.hlmbackend.app.repository.EducationInfoRepository;
+import com.hexaware.hlmbackend.app.repository.EmailRepository;
 import com.hexaware.hlmbackend.app.repository.EnquiryFormRepository;
 import com.hexaware.hlmbackend.app.repository.FamilyInfoRepository;
 import com.hexaware.hlmbackend.app.repository.GurantorRepository;
@@ -72,6 +80,12 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 	
 	@Autowired
 	private LedgerRepository ledgerRepo;  
+	
+	@Autowired
+	private JavaMailSender jms;
+	
+	@Autowired
+	private EmailRepository emailRepo;
 
 	@Override
 	public EnquiryForm PostEnquiryFormData(EnquiryForm eqi) {
@@ -286,6 +300,34 @@ public class HomeLoanServiceImpl implements HomeLoanServiceInterface{
 		else {
 			return null;
 		}
+		
+	}
+
+	@Override
+	public void sendEmail(CustomerEmail custEmail, MultipartFile attachedFile) throws MessagingException {
+		
+		MimeMessage mm = jms.createMimeMessage();
+		
+		MimeMessageHelper mmh = new MimeMessageHelper(mm, true);
+		mmh.setFrom(custEmail.getFromSender());
+		
+		System.out.println("toReceiver: "+custEmail.getToReceiver());
+		mmh.setTo(custEmail.getToReceiver());
+		mmh.setSubject(custEmail.getSubject());
+		
+		//Design format of email to be sent
+		mmh.setText(
+				custEmail.getTextBody()
+				);
+		mmh.addAttachment(attachedFile.getOriginalFilename(), attachedFile);
+		
+		emailRepo.save(custEmail);
+		
+		jms.send(mm);
+		
+		System.out.println("email sent");
+		
+		
 		
 	}
 
