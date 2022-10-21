@@ -127,8 +127,9 @@ public class Step9Controller {
 		
 	//step7
 			
-			System.out.println("Customer Response: "+savedCustomer.getCustomerAcceptanceStatus());
+			
 			c.setCustomerAcceptanceStatus(savedCustomer.getCustomerAcceptanceStatus());
+			System.out.println("Customer Response: "+savedCustomer.getCustomerAcceptanceStatus());
 			
 	//step8
 			LoanAgreement la = savedCustomer.getLoanAgreement();
