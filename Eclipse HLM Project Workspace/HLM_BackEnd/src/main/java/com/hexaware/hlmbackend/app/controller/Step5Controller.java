@@ -48,16 +48,17 @@ public class Step5Controller {
 			@RequestPart String customerApplication,
 			@PathVariable Integer savedCustomerId) throws IOException
 	{
-		//Converting JSON into POJO	
+		
+	//Converting JSON into POJO	
 			ObjectMapper om = new ObjectMapper();
 			Customer cla = om.readValue(customerApplication, Customer.class);
 			
 		
-		//Fetching customer from Database
+	//Fetching customer from Database
 			Customer savedCustomer = hlsi.getSavedCustomer(savedCustomerId);
 			Customer c = new Customer();
 			
-		//step1
+	//step1
 		c.setCustomerId(savedCustomerId);
 		c.setCustomerName(savedCustomer.getCustomerName());
 		c.setCustomerDateOfBirth(savedCustomer.getCustomerDateOfBirth());
@@ -70,104 +71,91 @@ public class Step5Controller {
 		c.setCustomerTotalLoanRequired(savedCustomer.getCustomerTotalLoanRequired());
 		
 		Address addr1 =  savedCustomer.getCustomerAddress();
-		addr1.setHouseNumber(savedCustomer.getCustomerAddress().getHouseNumber());
-		addr1.setStreetName(savedCustomer.getCustomerAddress().getStreetName());
+//		addr1.setHouseNumber(savedCustomer.getCustomerAddress().getHouseNumber());
+//		addr1.setStreetName(savedCustomer.getCustomerAddress().getStreetName());
 //		addr1.setAreaName(savedCustomer.getCustomerAddress().getAreaName()); //Trial to check if it gets null value or keeps the old value
 //		addr1.setCityName(savedCustomer.getCustomerAddress().getCityName());
-		addr1.setDistrict(savedCustomer.getCustomerAddress().getDistrict());
-		addr1.setState(savedCustomer.getCustomerAddress().getState());
-		addr1.setPincode(savedCustomer.getCustomerAddress().getPincode());
-		
+//		addr1.setDistrict(savedCustomer.getCustomerAddress().getDistrict());
+//		addr1.setState(savedCustomer.getCustomerAddress().getState());
+//		addr1.setPincode(savedCustomer.getCustomerAddress().getPincode());
 		c.setCustomerAddress(addr1);
 		
-		//step2
+	//step2
 		EducationalInfo ei = savedCustomer.getEducationalInfo();
-		ei.setEducationType(savedCustomer.getEducationalInfo().getEducationType());
-		
+//		ei.setEducationType(savedCustomer.getEducationalInfo().getEducationType());
 		c.setEducationalInfo(ei);
 		
 		FamilyInfo fi = savedCustomer.getFamilyInfo();
-		fi.setFatherName(savedCustomer.getFamilyInfo().getFatherName());
-		fi.setMotherName(savedCustomer.getFamilyInfo().getMotherName());
-		fi.setSpouseName(savedCustomer.getFamilyInfo().getSpouseName());
-		fi.setNoOfFamilyMembers(savedCustomer.getFamilyInfo().getNoOfFamilyMembers());
-		fi.setNoOfChildren(savedCustomer.getFamilyInfo().getNoOfChildren());
-		fi.setMaritalStatus(savedCustomer.getFamilyInfo().getMaritalStatus());
-		fi.setFamilyIncome(savedCustomer.getFamilyInfo().getFamilyIncome());
-		
+//		fi.setFatherName(savedCustomer.getFamilyInfo().getFatherName());
+//		fi.setMotherName(savedCustomer.getFamilyInfo().getMotherName());
+//		fi.setSpouseName(savedCustomer.getFamilyInfo().getSpouseName());
+//		fi.setNoOfFamilyMembers(savedCustomer.getFamilyInfo().getNoOfFamilyMembers());
+//		fi.setNoOfChildren(savedCustomer.getFamilyInfo().getNoOfChildren());
+//		fi.setMaritalStatus(savedCustomer.getFamilyInfo().getMaritalStatus());
+//		fi.setFamilyIncome(savedCustomer.getFamilyInfo().getFamilyIncome());
 		c.setFamilyInfo(fi);
 		
 		Profession pf = savedCustomer.getProfession();
-		pf.setProfessionType(savedCustomer.getProfession().getProfessionType());
-		pf.setProfessionDesignation(savedCustomer.getProfession().getProfessionDesignation());
-		pf.setProfessionSalary(savedCustomer.getProfession().getProfessionSalary());
-		
+//		pf.setProfessionType(savedCustomer.getProfession().getProfessionType());
+//		pf.setProfessionDesignation(savedCustomer.getProfession().getProfessionDesignation());
+//		pf.setProfessionSalary(savedCustomer.getProfession().getProfessionSalary());
 		c.setProfession(pf);
 		
-//		//step3
+		
+	//step3
 		AllPersonalDocuments apd =savedCustomer.getAllPersonalDocuments();
 		c.setAllPersonalDocuments(apd);
 		
-		//step4
 		
+	//step4
 		CibilData cd = savedCustomer.getCibilDetails();
-		
-		cd.setCibilScore(savedCustomer.getCibilDetails().getCibilScore());
-		cd.setCibilScoreDateTime(savedCustomer.getCibilDetails().getCibilScoreDateTime());
-		cd.setStatus(savedCustomer.getCibilDetails().getStatus());
-		cd.setRemarksByOe(savedCustomer.getCibilDetails().getRemarksByOe());
-		
+//		cd.setCibilScore(savedCustomer.getCibilDetails().getCibilScore());
+//		cd.setCibilScoreDateTime(savedCustomer.getCibilDetails().getCibilScoreDateTime());
+//		cd.setStatus(savedCustomer.getCibilDetails().getStatus());
+//		cd.setRemarksByOe(savedCustomer.getCibilDetails().getRemarksByOe());
 		c.setCibilDetails(cd);
 		
 		AccountDetails ad = savedCustomer.getAccountDetails();
-		ad.setAccountType(savedCustomer.getAccountDetails().getAccountType());
-		ad.setAccountBalance(savedCustomer.getAccountDetails().getAccountBalance());
-		ad.setAccountHolderName(savedCustomer.getAccountDetails().getAccountHolderName());
-		ad.setAccountStatus(savedCustomer.getAccountDetails().getAccountStatus());
-		ad.setAccountNumber(savedCustomer.getAccountDetails().getAccountNumber());
-		
+//		ad.setAccountType(savedCustomer.getAccountDetails().getAccountType());
+//		ad.setAccountBalance(savedCustomer.getAccountDetails().getAccountBalance());
+//		ad.setAccountHolderName(savedCustomer.getAccountDetails().getAccountHolderName());
+//		ad.setAccountStatus(savedCustomer.getAccountDetails().getAccountStatus());
+//		ad.setAccountNumber(savedCustomer.getAccountDetails().getAccountNumber());
 		c.setAccountDetails(ad);
 		
 		PropertyInfo pi = savedCustomer.getPropertyInfo();
-		
-		pi.setPropertyType(savedCustomer.getPropertyInfo().getPropertyType());
-		pi.setPropertyArea(savedCustomer.getPropertyInfo().getPropertyType());
-		pi.setConstructionArea(savedCustomer.getPropertyInfo().getConstructionArea());
-		pi.setPropertyPrice(savedCustomer.getPropertyInfo().getPropertyPrice());
-		pi.setConstructionPrice(savedCustomer.getPropertyInfo().getConstructionPrice());
+//		pi.setPropertyType(savedCustomer.getPropertyInfo().getPropertyType());
+//		pi.setPropertyArea(savedCustomer.getPropertyInfo().getPropertyType());
+//		pi.setConstructionArea(savedCustomer.getPropertyInfo().getConstructionArea());
+//		pi.setPropertyPrice(savedCustomer.getPropertyInfo().getPropertyPrice());
+//		pi.setConstructionPrice(savedCustomer.getPropertyInfo().getConstructionPrice());
 //		pi.setPriceProofs(propertyDocuments.getBytes());
 //		pi.setPropertyDocuments(priceProofs.getBytes());
-		
 		PropertyAddress pa = savedCustomer.getPropertyInfo().getPropertyAddress();
-		
-		pa.setAreaName(savedCustomer.getPropertyInfo().getPropertyAddress().getAreaName());
-		pa.setCityName(savedCustomer.getPropertyInfo().getPropertyAddress().getCityName());
-		pa.setDistrict(savedCustomer.getPropertyInfo().getPropertyAddress().getDistrict());
-		pa.setState(savedCustomer.getPropertyInfo().getPropertyAddress().getState());
-		pa.setPincode(savedCustomer.getPropertyInfo().getPropertyAddress().getPincode());
-		pa.setStreetName(savedCustomer.getPropertyInfo().getPropertyAddress().getStreetName());
-
+//		pa.setAreaName(savedCustomer.getPropertyInfo().getPropertyAddress().getAreaName());
+//		pa.setCityName(savedCustomer.getPropertyInfo().getPropertyAddress().getCityName());
+//		pa.setDistrict(savedCustomer.getPropertyInfo().getPropertyAddress().getDistrict());
+//		pa.setState(savedCustomer.getPropertyInfo().getPropertyAddress().getState());
+//		pa.setPincode(savedCustomer.getPropertyInfo().getPropertyAddress().getPincode());
+//		pa.setStreetName(savedCustomer.getPropertyInfo().getPropertyAddress().getStreetName());
 		pi.setPropertyAddress(pa);
-		
 		c.setPropertyInfo(pi);
 		
 		GurantorDetails gd = savedCustomer.getGurantorDetails();
-		gd.setGurantorName(savedCustomer.getGurantorDetails().getGurantorName());
-		gd.setGurantorDateOfBirth(savedCustomer.getGurantorDetails().getGurantorDateOfBirth());
-		gd.setGurantorMobileNumber(savedCustomer.getGurantorDetails().getGurantorMobileNumber());
-		gd.setGurantorAadharCardNo(savedCustomer.getGurantorDetails().getGurantorAadharCardNo());
-		gd.setGurantorAddress(savedCustomer.getGurantorDetails().getGurantorAddress());
-		gd.setGurantorRelationship(savedCustomer.getGurantorDetails().getGurantorRelationship());
-		
+//		gd.setGurantorName(savedCustomer.getGurantorDetails().getGurantorName());
+//		gd.setGurantorDateOfBirth(savedCustomer.getGurantorDetails().getGurantorDateOfBirth());
+//		gd.setGurantorMobileNumber(savedCustomer.getGurantorDetails().getGurantorMobileNumber());
+//		gd.setGurantorAadharCardNo(savedCustomer.getGurantorDetails().getGurantorAadharCardNo());
+//		gd.setGurantorAddress(savedCustomer.getGurantorDetails().getGurantorAddress());
+//		gd.setGurantorRelationship(savedCustomer.getGurantorDetails().getGurantorRelationship());
 		c.setGurantorDetails(gd);
 		
 		
 		//need to set and get all fields of customer, from savedCustomer to Customer c
 		
 		
-	
+	//current Step(step 5)
 		DeligenceReport dr = savedCustomer.getDeligenceReport();
-		
 		dr.setDeligenceReportId(savedCustomer.getDeligenceReport().getDeligenceReportId());
 	
 		FieldInvestigation fin = savedCustomer.getDeligenceReport().getFieldInvestigation();
@@ -191,10 +179,21 @@ public class Step5Controller {
 		c.setDeligenceReportStatus(cla.getDeligenceReportStatus());
 		
 		
+		
+		
+	//Next steps	
 		c.setSanctionLetter(savedCustomer.getSanctionLetter());
+		c.setSanctionLetterStatus(savedCustomer.getSanctionLetterStatus());
+		c.setDoReportBmResponse(savedCustomer.getDoReportBmResponse());
+		c.setDoReportBmResponseStatus(savedCustomer.getDoReportBmResponseStatus());
+		c.setCustomerAcceptanceStatus(savedCustomer.getCustomerAcceptanceStatus());
 		c.setLoanAgreement(savedCustomer.getLoanAgreement());
+		c.setLoanAgreementStatus(savedCustomer.getLoanAgreementStatus());
+		c.setLoanAgreementBmSignStatus(savedCustomer.getLoanAgreementBmSignStatus());
 		c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
+		c.setLoanDisbursementStatus(savedCustomer.getLoanDisbursementStatus());
 	
+	//sending customer object to database
 		hlsi.insertStep5Data(c);
 		
 	return "Step5 saved";

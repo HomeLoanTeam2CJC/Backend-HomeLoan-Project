@@ -355,6 +355,12 @@ public class CustomerController {
 		return customerList;
 	}
 	
+	@GetMapping("/getCustomer/{customerId}")
+	public Customer getCustomer(@PathVariable Integer customerId){
+		Customer c = hlsi.getSavedCustomer(customerId);
+		return c;
+	}
+	
 	
 	
 }

@@ -22,6 +22,7 @@ import com.hexaware.hlmbackend.app.model.FamilyInfo;
 import com.hexaware.hlmbackend.app.model.FieldInvestigation;
 import com.hexaware.hlmbackend.app.model.FinancialCheck;
 import com.hexaware.hlmbackend.app.model.GurantorDetails;
+import com.hexaware.hlmbackend.app.model.LoanAgreement;
 import com.hexaware.hlmbackend.app.model.Profession;
 import com.hexaware.hlmbackend.app.model.PropertyAddress;
 import com.hexaware.hlmbackend.app.model.PropertyInfo;
@@ -131,8 +132,15 @@ public class Step5Point5Controller {
 				
 				
 				
+		//Next steps	
+				c.setDoReportBmResponse(savedCustomer.getDoReportBmResponse());
+				c.setDoReportBmResponseStatus(savedCustomer.getDoReportBmResponseStatus());
+				c.setCustomerAcceptanceStatus(savedCustomer.getCustomerAcceptanceStatus());
 				c.setLoanAgreement(savedCustomer.getLoanAgreement());
+				c.setLoanAgreementStatus(savedCustomer.getLoanAgreementStatus());
+				c.setLoanAgreementBmSignStatus(savedCustomer.getLoanAgreementBmSignStatus());
 				c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
+				c.setLoanDisbursementStatus(savedCustomer.getLoanDisbursementStatus());
 				
 				
 				hlsi.insertStep5Point5Data(c);

@@ -38,7 +38,7 @@ public class Step8Controller {
 	private HomeLoanServiceInterface hlsi;
 	
 	@PostMapping(value = "/postStep8/{savedCustomerId}")
-	public String InsertStep7Data(
+	public String InsertStep8Data(
 			@RequestPart String customerApplication,
 			@PathVariable Integer savedCustomerId) throws JsonMappingException, JsonProcessingException
 	{
@@ -53,7 +53,7 @@ public class Step8Controller {
 			Customer c = new Customer();
 		
 		
-			//step1
+		//step1
 			c.setCustomerId(savedCustomerId);
 			c.setCustomerName(savedCustomer.getCustomerName());
 			c.setCustomerDateOfBirth(savedCustomer.getCustomerDateOfBirth());
@@ -120,7 +120,7 @@ public class Step8Controller {
 			c.setDoReportBmResponse(savedCustomer.getDoReportBmResponse());
 		
 		
-			c.setLoanAgreement(savedCustomer.getLoanAgreement());
+			
 			c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
 		
 	//step7
@@ -133,11 +133,8 @@ public class Step8Controller {
 			
 			
 			
-		//Current Step		
-			
-			
+	//Current Step		
 			LoanAgreement la = savedCustomer.getLoanAgreement();
-			
 			la.setLoanAgreementName(cla.getLoanAgreement().getLoanAgreementName());
 			la.setApplicantName(cla.getLoanAgreement().getApplicantName());
 			la.setContactDetails(cla.getLoanAgreement().getContactDetails());
@@ -152,6 +149,11 @@ public class Step8Controller {
 			
 			c.setLoanAgreement(la);
 			c.setLoanAgreementStatus(cla.getLoanAgreementStatus());
+			
+	//Next steps
+			c.setLoanAgreementBmSignStatus(savedCustomer.getLoanAgreementBmSignStatus());
+			c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
+			c.setLoanDisbursementStatus(savedCustomer.getLoanDisbursementStatus());
 			
 			hlsi.insertStep7Data(c);
 			

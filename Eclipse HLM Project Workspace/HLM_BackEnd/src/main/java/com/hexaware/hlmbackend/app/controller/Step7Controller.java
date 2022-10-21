@@ -119,14 +119,21 @@ public class Step7Controller {
 			c.setDoReportBmResponse(savedCustomer.getDoReportBmResponse());
 		
 		
-			c.setLoanAgreement(savedCustomer.getLoanAgreement());
-			c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
+			
 		
 		//current step(step7){note: Every time you copy paste this in the next step,
 //			change "cla." into "savedCustomer."}
 			
 			System.out.println("Customer Response: "+cla.getCustomerAcceptanceStatus());
 			c.setCustomerAcceptanceStatus(cla.getCustomerAcceptanceStatus());
+			
+		//Next steps
+			c.setLoanAgreement(savedCustomer.getLoanAgreement());
+			c.setLoanAgreementStatus(savedCustomer.getLoanAgreementStatus());
+			c.setLoanAgreementBmSignStatus(savedCustomer.getLoanAgreementBmSignStatus());
+			c.setLoanDisbursement(savedCustomer.getLoanDisbursement());
+			c.setLoanDisbursementStatus(savedCustomer.getLoanDisbursementStatus());
+			
 		
 			hlsi.insertStep7Data(c);
 		
